@@ -38,15 +38,18 @@ Currently, my main interest are
 [![Linkedin Badge](https://img.shields.io/badge/-nguyentaijs-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/nguyentaijs)
 [![Google Badge](https://img.shields.io/badge/-nguyentaijs-D14836?style=flat&logo=gmail&logoColor=white)](mailto:nguyentaijs@gmail.com)
 
-<h1></h1>
-
+###
 <div align="right">
   <h3>Languages and Tools</h3>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original-wordmark.svg" title="Spring" alt="Spring" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/go/go-original.svg" title="GoLang" alt="GoLang" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/solidity/solidity-original.svg" title="Solidity" alt="Solidity" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/vim/vim-original.svg" title="Vim" alt="Vim" width="40" height="40"/>
+
+  ![Java](../assets/images/icons8-java.gif)
+  ![Spring](../assets/images/icons8-spring-boot-48.png)
+  ![Go](../assets/images/icons8-golang-48.png)
+  ![Java](../assets/images/icons8-solidity-48.png)
+  ![Java](../assets/images/icons8-vim.png)
+  <br/>
+  ![css3](../assets/images/icons8-css3-48.png)
+  ![Html](../assets/images/icons8-html-5-48.png)
   <br/>
 </div>
 
