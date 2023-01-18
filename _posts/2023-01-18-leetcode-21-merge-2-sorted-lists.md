@@ -8,7 +8,8 @@ date: 2023-01-18 08:07 +0700
 
 # Merge 2 linked list đã được sắp xếp
 
-#### [_Leet code problem 21_](https://leetcode.com/problems/merge-two-sorted-lists/)
+[_Leet code problem 21_](https://leetcode.com/problems/merge-two-sorted-lists/)\
+_Difficulty: Easy_
 
 ---
 ### Given

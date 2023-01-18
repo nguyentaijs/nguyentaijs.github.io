@@ -2,8 +2,6 @@
 icon: fas fa-info-circle
 order: 4
 ---
-### About Me
-
 I am a Full Stack Developer with years of experience in clean Java and React
 
 Currently, my main interest are
