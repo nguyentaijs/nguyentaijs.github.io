@@ -52,7 +52,7 @@ public class L21_MergeTwoSortedList {
             curList = curList.next;
         }
         curList.next = l1 == null ? l2 : l1;
-        return preHead;
+        return preHead.next;
     }
 }
 ```
