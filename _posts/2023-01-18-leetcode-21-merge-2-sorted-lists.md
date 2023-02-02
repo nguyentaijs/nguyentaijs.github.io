@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Leetcode 21 - Merge 2 sorted lists (Merge 2 linked list đã được sắp xếp)
+title: Leetcode 21. Merge 2 sorted lists (Merge 2 linked list đã được sắp xếp)
 categories: [Leetcode, Challenge]
 tags: [leetcode, challenge]
 date: 2023-01-18 08:07 +0700
