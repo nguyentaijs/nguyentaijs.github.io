@@ -33,7 +33,8 @@ Return Head của merged list
 3. Thêm phần tử còn lại vào `resultList`
 4. Trả về `node` đầu tiên của `resultList`
 
-**Implementation**
+**Implementation**\
+Code from [_github_](https://github.com/nguyentaijs/Leetcode/blob/main/src/L21_MergeTwoSortedList.java)
 
 ```java
 public class L21_MergeTwoSortedList {
