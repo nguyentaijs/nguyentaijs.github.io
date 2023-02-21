@@ -3,7 +3,7 @@ layout: post
 title: Leetcode 14. Longest Common Prefix (Tìm tiền tố dài nhất)
 categories: [Leetcode, Challenge]
 tags: [leetcode, challenge]
-date: 2023-01-20 20:30 +0700
+date: 2023-01-17 20:30 +0700
 ---
 [_Leet code problem 14_](https://leetcode.com/problems/longest-common-prefix/)\
 _Difficulty: Easy_
