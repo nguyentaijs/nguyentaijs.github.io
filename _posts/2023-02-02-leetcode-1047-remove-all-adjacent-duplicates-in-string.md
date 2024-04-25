@@ -2,7 +2,7 @@
 layout: post
 title: Leetcode 1047. Remove All Adjacent Duplicates In String (Loại bỏ tất cả các bản sao liền kề trong chuỗi)
 categories: [Leetcode, Challenge]
-tags: [leetcode, challenge]
+tags: [leetcode, challenge, easy]
 date: 2023-02-02 08:07 +0700
 ---
 [_Leet code problem 1047_](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/)\

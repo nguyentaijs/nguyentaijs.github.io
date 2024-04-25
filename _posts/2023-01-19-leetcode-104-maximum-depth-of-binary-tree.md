@@ -2,7 +2,7 @@
 layout: post
 title: Leetcode 104. Maximum Depth of Binary Tree (Chiều cao tối đa của cây nhị phân)
 categories: [Leetcode, Challenge]
-tags: [leetcode, challenge]
+tags: [leetcode, challenge, easy]
 date: 2023-01-19 19:07 +0700
 ---
 [_Leet code problem 104_](https://leetcode.com/problems/maximum-depth-of-binary-tree/)\

@@ -2,7 +2,7 @@
 layout: post
 title: Leetcode 20. Valid Parentheses (Tìm cặp dấu ngoặc hợp lệ)
 categories: [Leetcode, Challenge]
-tags: [leetcode, challenge]
+tags: [leetcode, challenge, easy]
 date: 2023-01-20 21:02 +0700
 ---
 [_Leet code problem 20_](https://leetcode.com/problems/valid-parentheses/)\
