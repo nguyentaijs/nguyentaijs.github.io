@@ -8,23 +8,23 @@ date: 2023-01-18 08:07 +0700
 [_Leet code problem 21_](https://leetcode.com/problems/merge-two-sorted-lists/)\
 _Difficulty: Easy_
 ---
-### Given
+## Given
 2 linked list đã được sắp xếp `list1` & `list2`
 
-### Expectation
+## Expectation
 Merge thành 1 list mới được sắp xếp từ `list1` & `list2`\
 Return Head của merged list
 
 ![Image](https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg)
 
-### Solution
+## Solution
 
 **Chú thích**\
 `resultList`: Linked list kết quả\
 `p1`: node hiện tại của `list1`\
 `p2`: node hiện tại của `list2`
 
-#### Iterative approach
+### Iterative approach
 
 1. So sánh giá trị của `p1` và `p2`
     - Thêm vào `resultList` phần tử có giá trị nhỏ hơn

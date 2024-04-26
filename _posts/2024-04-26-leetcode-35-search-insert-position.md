@@ -8,7 +8,7 @@ date: 2024-04-26 21:03 +0700
 [_Leet code problem 35_](https://leetcode.com/problems/search-insert-position/description/)\
 _Difficulty: Easy_
 ---
-### Solution
+## Solution
 - The question mentioned that the complexity must be `Olog(n)` and it's a search algorithm
 - We can clearly see that one of the way to solve this is using `Binary search` with a little modification
 - Instead of return `-1 (not found)` we return the `minIndex` as the position of the `target` if it exists in the `nums` array

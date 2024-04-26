@@ -8,13 +8,13 @@ date: 2023-01-19 19:07 +0700
 [_Leet code problem 104_](https://leetcode.com/problems/maximum-depth-of-binary-tree/)\
 _Difficulty: Easy_
 ---
-### Given
+## Given
 Cây nhị phân
 
-### Expectation
+## Expectation
 Chiều cao tối đa của cây nhị phân này
 
-### Solution
+## Solution
 
 **Recursive**
 

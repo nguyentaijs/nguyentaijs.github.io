@@ -8,19 +8,19 @@ date: 2023-01-20 21:02 +0700
 [_Leet code problem 20_](https://leetcode.com/problems/valid-parentheses/)\
 _Difficulty: Easy_
 ---
-### Given
+## Given
 Một chuỗi chứa toàn bộ các ký tự
 ```
 '[', ']', '(', ')', '{', '}'
 ```
 
-### Expectation
+## Expectation
 Kiểm tra tính hợp lệ của chuỗi được test, chuỗi được xét là hợp lệ khi
 * Mở ngoặc phải được đóng bởi dấu đóng ngoặc tương ứng
 * Dấu ngoặc phải được đóng theo đúng thứ tự chúng được mở
 * Mỗi dấu ngoặc đóng phải có một dấu mở ngoặc tương ứng
 
-### Solution
+## Solution
 
 Yêu cầu có thể giải quyết được bằng cách sử dụng một `stack` chứa toàn bộ các dấu đóng ngoặc.\
 Kiểm tra tính hợp lệ bằng cách so sánh ký tự trên cùng của `stack` với ký tự tiếp theo được đưa vào `stack`\

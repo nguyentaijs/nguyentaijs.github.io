@@ -7,19 +7,19 @@ date: 2024-04-25 21:07 +0700
 ---
 
 ![Image](https://media.geeksforgeeks.org/wp-content/uploads/20220309171621/BinarySearch.png)
-*Image from GeeksForGeeks*\
+*Image from GeeksForGeeks*
 > #binary_search, #binary_chop, #half_interval_search, #logarithmic_search
 
-### Condition
+## Condition
 - The data structure must be `sorted`
 - Can access to any item in the data structure with a constant time
 
-### Time Complexity
+## Time Complexity
 **Best case**: O(1)\
 **Average case**: O(log n)\
 **Worst case**: O(log n)
 
-### Algorithm
+## Algorithm
 - Divide the data structure into 2 equal half to find the `target`
 - Determine 3 indexes
   ```
@@ -33,7 +33,7 @@ date: 2024-04-25 21:07 +0700
   - if `data[mid] < target` means the `target` is in the upper part -> set `min = mid + 1`
   - if `min > max` -> can not find the `target`
 
-### Implementation
+## Implementation
 *Iterative*\
 *TODO: Recursive*
 

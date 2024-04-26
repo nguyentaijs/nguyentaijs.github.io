@@ -8,16 +8,16 @@ date: 2023-01-17 20:30 +0700
 [_Leet code problem 14_](https://leetcode.com/problems/longest-common-prefix/)\
 _Difficulty: Easy_
 ---
-### Given
+## Given
 Một mảng các chuỗi string. VD
 ```
 ["abc", "abcde", "abwtf"]
 ```
 
-### Expectation
+## Expectation
 Tìm tiền tố dài nhất có thể có của các chuỗi trong mảng. Ở ví dụ trên, kế quả sẽ là `ab`
 
-### Solution
+## Solution
 
 Yêu cầu rất cơ bản đơn giản. Nếu sử dụng function `startWith()` & `substring()` được cung cấp bởi Java, cách giải quyết sẽ là
 

@@ -8,7 +8,7 @@ date: 2024-04-25 18:08 +0700
 [_Leet code problem 26_](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)\
 _Difficulty: Easy_
 ---
-### Solution
+## Solution
 - Use 2 variables `curIndex` & `uniqueCount`
 - Iterate the whole `nums` array using `curIndex`. If there are any different between current and previous -> add it to the `uniqueCount` index
 
