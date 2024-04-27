@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Binary Search
+title: [Algorithm] Binary Search
 categories: [Algorithm]
 tags: [algorithm, binary_search]
 date: 2024-04-25 21:07 +0700
