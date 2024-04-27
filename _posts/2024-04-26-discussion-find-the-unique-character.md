@@ -1,7 +1,7 @@
 ---
 layout: post
-title: [Discussion] Các giải thuật random cơ bản (TODO)
-categories: [Discussion]
+title: Các giải thuật random cơ bản (TODO)
+categories: [discussion]
 tags: [discussion]
 date: 2024-04-26 11:03 +0700
 hidden: true

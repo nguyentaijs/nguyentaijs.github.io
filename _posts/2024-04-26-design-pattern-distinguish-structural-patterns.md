@@ -1,7 +1,7 @@
 ---
 layout: post
-title: [Design pattern] Distinguish structural patterns
-categories: [Discussion, Design_pattern]
+title: Distinguish structural patterns
+categories: [discussion, design_pattern]
 tags: [discussion, design_pattern]
 date: 2024-04-26 11:03 +0700
 hidden: true
