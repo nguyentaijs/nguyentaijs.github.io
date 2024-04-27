@@ -4,7 +4,7 @@ title: [Discussion] Các giải thuật random cơ bản (TODO)
 categories: [Discussion]
 tags: [discussion]
 date: 2024-04-26 11:03 +0700
-published: false
+hidden: true
 ---
 
 ## Đặt vấn đề

@@ -4,7 +4,7 @@ title: [Design pattern] Distinguish structural patterns
 categories: [Discussion, Design_pattern]
 tags: [discussion, design_pattern]
 date: 2024-04-26 11:03 +0700
-published: false
+hidden: true
 ---
 
 ## Đặt vấn đề
@@ -14,14 +14,22 @@ Trong cuốn Head First Design Pattern, chúng ta đã biết rằng các loại
 - Behavior design pattern
 - Structural design pattern
 
-Mỗi loại pattern cung cấp các giải pháp để xử lý các vấn đề cụ thể.
-Trong đó, đặc biệt là structural design pattern có cách thức triển khai và định nghĩa có nhiều điểm tương đồng.
+Mỗi loại pattern cung cấp các giải pháp để xử lý các vấn đề cụ thể.\
+Trong đó, đặc biệt là structural design pattern có cách thức triển khai và định nghĩa có nhiều điểm tương đồng.\
+Tôi sẽ đi 1 vòng để làm rõ các điểm khác biệt của các pattern trong nhóm này
 
 
-## Các giải pháp
+## Các structural patterns cơ bản
+- Composite pattern
+- Decorator pattern
+- Adapter pattern
+- Proxy pattern
+- Bridge pattern
+- Facade
+- Fly weight
 
 ### Time based random
-Random dựa trên giá trị của `System.curentTimeMillis()` cho chuỗi số [stackoverflow](https://stackoverflow.com/a/18228151/7081611)/
+Random dựa trên giá trị của `System.curentTimeMillis()` cho chuỗi số [stackoverflow](https://stackoverflow.com/a/18228151/7081611)
 
 Cách này cho phép tạo dữ liệu unique nhưng không đảm bảo tính bảo mật vì giá trị của key có thể dự đoán dễ dàng
 

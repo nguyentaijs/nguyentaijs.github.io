@@ -5,7 +5,6 @@ categories: [Algorithm]
 tags: [algorithm, binary_search]
 date: 2024-04-25 21:07 +0700
 ---
-
 ![Image](https://media.geeksforgeeks.org/wp-content/uploads/20220309171621/BinarySearch.png)
 *Image from GeeksForGeeks*
 > #binary_search, #binary_chop, #half_interval_search, #logarithmic_search
