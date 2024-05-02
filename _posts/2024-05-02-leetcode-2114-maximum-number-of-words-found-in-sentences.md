@@ -5,7 +5,7 @@ categories: [Leetcode, Challenge]
 tags: [leetcode, challenge, easy]
 date: 2024-05-02 12:03 +0700
 ---
-[_Leet code problem 1224_](https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/description/)\
+[_Leet code problem 2114_](https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/description/)\
 _Difficulty: Easy_
 ---
 ## Solution

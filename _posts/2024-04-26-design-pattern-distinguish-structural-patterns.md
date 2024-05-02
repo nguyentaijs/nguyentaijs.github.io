@@ -7,7 +7,7 @@ date: 2024-04-26 11:03 +0700
 hidden: true
 ---
 
-## Đặt vấn đề
+# Đặt vấn đề
 Trong cuốn Head First Design Pattern, chúng ta đã biết rằng các loại design pattern có thể được nhóm thành 3 loại chính:
 
 - Creation design pattern
@@ -19,7 +19,7 @@ Trong đó, đặc biệt là structural design pattern có cách thức triển
 Tôi sẽ đi 1 vòng để làm rõ các điểm khác biệt của các pattern trong nhóm này
 
 
-## Các structural patterns cơ bản
+# Các structural patterns cơ bản
 - Composite pattern
 - Decorator pattern
 - Adapter pattern
@@ -28,24 +28,26 @@ Tôi sẽ đi 1 vòng để làm rõ các điểm khác biệt của các patter
 - Facade
 - Fly weight
 
-### Time based random
-Random dựa trên giá trị của `System.curentTimeMillis()` cho chuỗi số [stackoverflow](https://stackoverflow.com/a/18228151/7081611)
+## Composite pattern
+![Image](https://refactoring.guru/images/patterns/content/composite/composite.png)
+*Image from refactoring.guru*
+### Mục đích sử dụng
+Xử lý các bài toán liên quan đến cấu trúc dạng cây mà ở đó các `node` hoặc `leaf` đều có các phương thức xử lý chung
+### Ví dụ điển hình
+**Folder structure**\
+`Parent folder` có thể add/remove/get `child folder` và `leaf node` có thể là `folder` hoặc `file` bất kỳ\
+Trên mỗi folder/file, người dùng có thể thao tác `open/edit/delete` và tính size của `node` hiện tại
+- Nếu node hiện tại là `leaf` thì chỉ cần return thuộc tính size của `leaf` hiện tại
+- Nếu node hiện tại là `root` thì phải thực hiện tính tổng size của các `node con` cho đến các `leaf node`
 
-Cách này cho phép tạo dữ liệu unique nhưng không đảm bảo tính bảo mật vì giá trị của key có thể dự đoán dễ dàng
-
-```java
-  private static final long LIMIT = 10000000000L;
-  private static long last = 0;
-
-  public static long getID() {
-    // 10 digits.
-    long id = System.currentTimeMillis() % LIMIT;
-    if ( id <= last ) {
-      id = (last + 1) % LIMIT;
-    }
-    return last = id;
-  }
+**Giao diện danh mục phim**\
+Danh mục có cấu trúc từ `root` đến các `leaf`, `leaf` có thể là một tập phim, một series, một category con chứa các deal cho phim mới ra mắt
+```
+Phim hành động > Châu Âu > Peaky blinders phần 1 > Peaky binliders tập 1
+Phim hành động > Các phim mới nhất của Cillian Murphy
 ```
 
-### Random theo giải thuật random của Java
+### Structure
+![Image](https://refactoring.guru/images/patterns/diagrams/composite/structure-en.png?id=b7f114558b594dfb220d225398b2b744)
+*Image from refactoring.guru*
 
