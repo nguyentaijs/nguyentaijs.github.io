@@ -29,8 +29,6 @@ Tôi sẽ đi 1 vòng để làm rõ các điểm khác biệt của các patter
 - Fly weight
 
 ## Composite pattern
-![Composite pattern](https://refactoring.guru/images/patterns/content/composite/composite.png)
-_Image from refactoring.guru_
 ### Mục đích sử dụng
 Xử lý các bài toán liên quan đến cấu trúc dạng cây mà ở đó các `node` hoặc `leaf` đều có các phương thức xử lý chung
 ### Ví dụ điển hình
@@ -48,8 +46,3 @@ Phim hành động > Các phim mới nhất của Cillian Murphy
 ```
 
 ### Structure
-![Image]()
-*Image from refactoring.guru*
-
-![Composite structure](https://refactoring.guru/images/patterns/diagrams/composite/structure-en.png)
-_Image from refactoring.guru_
