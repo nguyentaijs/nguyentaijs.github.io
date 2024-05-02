@@ -9,7 +9,9 @@ date: 2024-05-02 12:03 +0700
 _Difficulty: Easy_
 ---
 ## Solution
-- This is pretty straight forward. You can just count the number or count the spaces between letters because the question already mentioned
+This is pretty straight forward.
+- You can just count the number of words `text.split(" ")`
+- Or count the spaces between letters because the question already mentioned
 that there will be no trailing/leading spaces and separated by a single space character
 
 **Implementation**\
