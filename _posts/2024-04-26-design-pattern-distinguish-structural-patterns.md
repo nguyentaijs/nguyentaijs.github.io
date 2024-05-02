@@ -48,6 +48,8 @@ Phim hành động > Các phim mới nhất của Cillian Murphy
 ```
 
 ### Structure
-![Image](https://refactoring.guru/images/patterns/diagrams/composite/structure-en.png?id=b7f114558b594dfb220d225398b2b744)
+![Image]()
 *Image from refactoring.guru*
 
+![Composite structure](https://refactoring.guru/images/patterns/diagrams/composite/structure-en.png)
+_Image from refactoring.guru_
