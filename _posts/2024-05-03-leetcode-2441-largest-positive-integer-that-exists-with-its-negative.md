@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Leetcode 2114. Maximum Number of Words Found in Sentences
+title: Leetcode 2441. Largest Positive Integer That Exists With Its Negative
 categories: [Leetcode, Challenge]
 tags: [leetcode, challenge, easy]
 date: 2024-05-03 05:00 +0700
@@ -9,7 +9,7 @@ date: 2024-05-03 05:00 +0700
 _Difficulty: Easy_
 ---
 ## Solution
-**First approach**\
+**Initial approach**\
 Utilize `HashMap`, iterate the whole array, for each item add it to the map. Each item should have one of
 the following value
 - NEGATIVE ONLY
