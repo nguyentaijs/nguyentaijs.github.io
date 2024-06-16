@@ -1,30 +1,16 @@
 ---
 layout: post
-title: Leetcode 2441. Largest Positive Integer That Exists With Its Negative
+title: Leetcode 881. Boats to save people
 categories: [Leetcode, Challenge]
-tags: [leetcode, challenge, easy]
+tags: [leetcode, challenge, medium]
 date: 2024-05-03 05:00 +0700
 ---
 
 ## Problem
-[_Leet code problem 2441_](https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/description/)\
-_Difficulty: Easy_
+[_Leet code problem 881_](https://leetcode.com/problems/boats-to-save-people/description/)\
+_Difficulty: Medium_
 ---
 ## Solution
-**Initial approach**\
-Utilize `HashMap`, iterate the whole array, for each item add it to the map. Each item should have one of
-the following value
-- NEGATIVE ONLY
-- POSITIVE ONLY
-- FOUND BOTH NEGATIVE AND POSITIVE
-
-This approach is cumbersome with lost of `if else` blocks
-
-
-**Second approach**\
-Use `HashSet` instead\
-The concept is to put every item in the array to a set of unique items\
-After that find the max value among items that contains its counterpart
 
 
 **Implementation**\
