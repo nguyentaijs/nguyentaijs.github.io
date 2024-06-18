@@ -21,7 +21,8 @@ OpenId Connect là một tiêu chuẩn mở rộng của OAuth 2.0 nhằm đáp 
 
 Tài liệu chi tiết được mô tả ở đây [Tài liệu](https://openid.net/specs/openid-connect-core-1_0.html)
 ## 1. Flow tổng quát
-![Single Sign On OpenId Connect]("https://github.com/nguyentaijs/nguyentaijs.github.io/tree/main/assets/img/SSO_OpenIdConnect.png")
+![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/SSO_OpenIdConnect.png)
+
 
 ## 2. Google Identity (OpenId Connect)
 TODO
