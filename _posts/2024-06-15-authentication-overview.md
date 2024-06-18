@@ -63,8 +63,8 @@ Là phương thức xác thực cho phép người dùng đăng nhập vào nhi�
 Ví dụ đăng nhập vào Gmail, bạn có thể access tất cả các dịch vụ khác trong hệ sinh thái của Google.\
 Các công nghệ và giao thức thường được sử dụng
 - SAML (Security Assertion Markup Language)
-- OAuth
-- OpenId Connect xây dựng trên nền OAuth 2.0
+- OAuth 2.0 (Chỉ dùng cho `authorization` not `authentication`)
+- OpenId Connect xây dựng trên nền OAuth 2.0 (`authentication` & `authorization`)
 
 ## 3. Biometric
 Xác thực sinh trắc học là phương pháp xác thực dựa trên các đặc điểm sinh học hoặc hành vi của con người.

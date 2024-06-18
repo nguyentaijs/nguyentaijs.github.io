@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title OpenId Connect Authentication (Request all code, id_token, token)
+
+actor "Resource owner" as user
+participant "User Agent (Web browser)" as ua
+participant "Client" as client
+participant "Identity Provider" as idP
+autonumber
+ua -> client: Access resources required authentication
+client -> ua: Request credentials
+ua -> idP: Request credentials
+note right ua
+Authorization Request including
+* response_type ... REQUIRED
+* scope ................ REQUIRED must include openid
+* redirect_url .......  REQUIRED
+* state .................. RECOMMENDED
+
+> Example
+  GET /authorize?
+    response_type=code%20id_token%20token
+    &client_id=s6BhdRkqt3
+    &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+    &scope=openid%20profile%20email
+    &nonce=n-0S6_WzA2Mj
+    &state=af0ifjsldkj HTTP/1.1
+  Host: server.example.com
+end note
+idP -> ua: Prompt for credentials
+note right ua
+ Usually login page & ask for permissions
+end note
+user -> ua: Feed user credentials
+ua -> idP: credentials
+idP -> idP: verify user credentials & permissions
+idP -> ua: Redirect including auth code
+note right ua
+Authorization Response
+code
+
+> Example
+  HTTP/1.1 302 Found
+  Location: https://client.example.org/cb#
+    code=Qcb0Orv1zh30vL1MPRsbm-diHiMwcLyZvn1arpZv-Jxf_11jnpEX3Tgfvk
+    &access_token=jHkWEdUXMU1BwAsC4vtUsZwnNvTIxEl0z9K3vx5KF0Y
+    &token_type=Bearer
+    &id_token=eyJraWQiOiIxZTlnZGs3IiwiYWxnIjoiUlMyNTYifQ.
+    ewogImlzcyI6ICJodHRwczovL3NlcnZlci5leGFtcGxlLmNvbSIsCiAic3ViIjog
+    IjI0ODI4OTc2MTAwMSIsCiAiYXVkIjogInM2QmhkUmtxdDMiLAogIm5vbmNlIjog
+    Im4tMFM2X1d6QTJNaiIsCiAiZXhwIjogMTMxMTI4MTk3MCwKICJpYXQiOiAxMzEx
+    MjgwOTcwLAogImF0X2hhc2giOiAiNzdRbVVQdGpQZnpXdEYyQW5wSzlSUSIsCiAi
+    Y19oYXNoIjogIkxEa3RLZG9RYWszUGswY25YeENsdEEiCn0.
+    A2OhhJzbUNaCbNLqNaqetGLJoxB3ujVbq_HLYSOWgWCJ3-B__YxlqIg8gpeL0Vhv
+    rWX0mwz7w_pGTRN4JdgsI0xAlT5fob1ZPnrazgonSyzaXcg2bgD896SsBSlG_8JX
+    6JKaztXifn8k2gy65Me-sMyQrRF8xv_q1CeC871sZpMjJzy5nx65BTI17vcXjntZ
+    HADv6o2CrHrEdHp8xSlnTLiiIqgDOmKlpkeqqOBK6dqa4rXZlSqMAUm1LYZmtb2D
+    8sHvQsxTbWlBkX7VZaTSqMJ487s4ZIEea8Bw4KGVOntQue4VhBjBnQ4bQKhB_47D
+    xlWpSyOWdy3cer_zxKrfvw
+    &state=af0ifjsldkj
+end note
+ua -> client: auth code
+client -> idP: Exchange code -> access_token & refresh_token & id_token
+note right client
+POST /token HTTP/1.1
+Host: server.example.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&
+code=SplxlOBeZQQYbYS6WxSbIA&
+redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb&
+client_id=s6BhdRkqt3&
+client_secret=7Fjfp0ZBr1KtDRbnfVdmIw
+end note
+idP -> client: access_token, refresh_token, id_token
+note right client
+{
+  "access_token": "SlAV32hkKG",
+  "token_type": "Bearer",
+  "refresh_token": "8xLOxBtZp8",
+  "expires_in": 3600,
+  "id_token": "eyJ0..."
+}
+end note
+
+@enduml
