@@ -23,5 +23,8 @@ Tài liệu chi tiết được mô tả ở đây [Tài liệu](https://openid.
 ## 1. Flow tổng quát
 ![Single Sign On OpenId Connect]("https://github.com/nguyentaijs/nguyentaijs.github.io/tree/main/assets/img/SSO_OpenIdConnect.png")
 
-## 2.
+## 2. Google Identity (OpenId Connect)
+TODO
+## 3. AWS OpenId Connect (OIDC)
+TODO
 
