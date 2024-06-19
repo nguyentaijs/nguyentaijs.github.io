@@ -45,7 +45,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
 
 **Authentication request:** `GET` request được tạo ra bởi `Client` thông qua `User Agent` để xác thực
 
-```http request
+```
   GET /authorize?
     response_type=code
     &scope=openid%20profile%20email
@@ -57,7 +57,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
 **Authentication response:** Response được tạo ra bởi `Authentication endpoint`
 
 `request_type` = `code`
-```http request
+```
   HTTP/1.1 302 Found
   Location: https://client.example.org/cb?
   code=SplxlOBeZQQYbYS6WxSbIA
@@ -65,7 +65,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
 ```
 `request_type` = `token id_token`
 
-```http request
+```
   HTTP/1.1 302 Found
   Location: https://client.example.org/cb#
   access_token=SlAV32hkKG
@@ -76,7 +76,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
 ```
 **Token request:** `POST` request được tạo ra bởi `Client` exchange `code` lấy `token`
 
-```http request
+```
 POST /token HTTP/1.1
   Host: server.example.com
   Content-Type: application/x-www-form-urlencoded
@@ -87,7 +87,7 @@ POST /token HTTP/1.1
 ```
 **Token response:** Response được tạo ra bởi `Token endpoint`
 
-```http request
+```
   HTTP/1.1 200 OK
   Content-Type: application/json
   Cache-Control: no-store
