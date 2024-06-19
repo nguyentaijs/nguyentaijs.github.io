@@ -44,6 +44,7 @@ VD: Endpoint của Google có dạng: https://accounts.google.com/o/oauth2/v2/au
 VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
 
 **Authentication request:** `GET` request được tạo ra bởi `Client` thông qua `User Agent` để xác thực
+
 ```http request
   GET /authorize?
     response_type=code
@@ -54,6 +55,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
   Host: server.example.com
 ```
 **Authentication response:** Response được tạo ra bởi `Authentication endpoint`
+
 `request_type` = `code`
 ```http request
   HTTP/1.1 302 Found
@@ -62,6 +64,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
   &state=af0ifjsldkj
 ```
 `request_type` = `token id_token`
+
 ```http request
   HTTP/1.1 302 Found
   Location: https://client.example.org/cb#
@@ -72,6 +75,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
   &state=af0ifjsldkj
 ```
 **Token request:** `POST` request được tạo ra bởi `Client` exchange `code` lấy `token`
+
 ```http request
 POST /token HTTP/1.1
   Host: server.example.com
@@ -82,6 +86,7 @@ POST /token HTTP/1.1
     &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
 ```
 **Token response:** Response được tạo ra bởi `Token endpoint`
+
 ```http request
   HTTP/1.1 200 OK
   Content-Type: application/json
@@ -104,6 +109,7 @@ POST /token HTTP/1.1
      XUVrWOLrLl0nx7RkKU8NXNHq-rvKMzqg"
   }
 ```
+
 ## 2. Server flow
 Trong `Authorization Request` set `response_type = code`, `client` dùng `code` này để exchange các `token`\
 ![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/openid_connect/SSO_OpenIdConnect_Server_Flow.png)
