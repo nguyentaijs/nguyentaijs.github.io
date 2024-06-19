@@ -27,7 +27,8 @@ Authorization Request including
     &client_id=s6BhdRkqt3
     &state=af0ifjsldkj
     &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb HTTP/1.1
-  Host: server.example.comend note
+  Host: server.example.com
+end note
 auth -> ua: Prompt for credentials
 note right ua
  Usually login page & ask for permissions

@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title OpenId Connect Authentication (Implicit flow)
+
+actor "Resource owner" as user
+participant "Client" as ua
+box
+participant "Authentication endpoint" as auth
+participant "Token endpoint" as token
+end box
+autonumber
+note over token
+  No interaction with this endpoint for Implicit flow
+  Client makes request to Authentication endpoint
+end note
+note over ua
+  Most of the time, Client = web application run on the browser
+end note
+ua -> auth: Request credentials
+note right ua
+Authorization Request including
+* response_type ... REQUIRED [id_token token, token, id_token]
+* scope ................ REQUIRED must include openid
+* redirect_url .......  REQUIRED
+* state .................. RECOMMENDED
+
+> Example: retrieve both id_token & token
+  GET /authorize?
+    response_type=id_token%20token
+    &client_id=s6BhdRkqt3
+    &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+    &scope=openid%20profile
+    &state=af0ifjsldkj
+    &nonce=n-0S6_WzA2Mj HTTP/1.1
+  Host: server.example.coma
+end note
+auth -> ua: Prompt for credentials
+note right ua
+ Usually login page & ask for permissions
+end note
+user -> ua: Feed user credentials
+ua -> auth: credentials
+auth -> auth: verify user credentials & permissions
+auth -> ua: Redirect including auth code
+note right ua
+Authorization Response
+access_token... when request token
+token_type........ALWAYS
+id_token............when request id_token
+expires_in.........ALWAYS
+state..................RECOMMENDED
+
+
+> Example
+  HTTP/1.1 302 Found
+  Location: https://client.example.org/cb#
+    access_token=SlAV32hkKG
+    &token_type=bearer
+    &id_token=eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso
+    &expires_in=3600
+    &state=af0ifjsldkj
+end note
+@enduml

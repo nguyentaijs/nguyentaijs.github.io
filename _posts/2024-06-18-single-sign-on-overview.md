@@ -27,7 +27,7 @@ Theo tài liệu chính thức của OpenID Connect, có ba phương thức xác
 Server flow có thể request `refresh_token` để duy trì quyền truy cập, đồng thời, giao tiếp chủ yếu là server-to-server, do đó, `User Agent` không cần lưu trữ `token`, giúp tăng cường bảo mật\
 
 Ngược lại, implicit flow không cần một `server` để tương tác với `token endpoint` mà có thể request `token` trực tiếp từ `authentication endpoint`.\
-Phương pháp này không yêu cầu nhiều request đến các `endpoint` khác nhau. Tuy nhiên, nhược điểm của phương pháp này là `token` có thể bị lộ trên User Agent (browser).
+Phương pháp này không yêu cầu gửi nhiều request đến các `endpoint` khác nhau. Tuy nhiên, nhược điểm của phương pháp này là `token` có thể bị lộ trên User Agent (browser).
 
 Hybrid flow sẽ được mô tả sau.
 ## 1. Server flow
@@ -35,4 +35,5 @@ Trong `Authorization Request` set `response_type = code`, `client` dùng `code` 
 ![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/openid_connect/SSO_OpenIdConnect_Server_Flow.png)
 
 ## 2. Implicit flow
-TODO
+Trong `response_type` của `Implicit flow` không có `code`, request trực tiếp `token`, `id_token` hoặc `token id_token` đến `authentication endpoint`
+![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/openid_connect/SSO_OpenIdConnect_Implicit_Flow.png)
