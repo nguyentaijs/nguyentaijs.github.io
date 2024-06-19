@@ -19,13 +19,20 @@ Cùng tìm hiểu chi tiết hơn 2 phương pháp này ở phần sau
 # III. OpenId Connect
 OpenId Connect là một tiêu chuẩn mở rộng của OAuth 2.0 nhằm đáp ứng nhu cầu sử dụng một Identity Provider cho mục đích `Authentication` & `Authorization`
 
-Tài liệu chi tiết được mô tả ở đây [Tài liệu](https://openid.net/specs/openid-connect-core-1_0.html)
-## 1. Flow tổng quát
-![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/SSO_OpenIdConnect.png)
+Tài liệu chi tiết được mô tả ở đây [Tài liệu](https://openid.net/specs/openid-connect-core-1_0.html)\
+Theo tài liệu chính thức của OpenID Connect, có ba phương thức xác thực khác nhau, tuỳ thuộc vào nhu cầu cụ thể của từng hệ thống.\
 
+![OpenId Connect authentication flows]({{ site.baseurl }}/assets/img/openid_connect/open-id-connect-authentication-flows.png)
 
-## 2. Google Identity (OpenId Connect)
+Server flow có thể request `refresh_token` để duy trì quyền truy cập, đồng thời, giao tiếp chủ yếu là server-to-server, do đó, `User Agent` không cần lưu trữ `token`, giúp tăng cường bảo mật\
+
+Ngược lại, implicit flow không cần một `server` để tương tác với `token endpoint` mà có thể request `token` trực tiếp từ `authentication endpoint`.\
+Phương pháp này không yêu cầu nhiều request đến các `endpoint` khác nhau. Tuy nhiên, nhược điểm của phương pháp này là `token` có thể bị lộ trên User Agent (browser).
+
+Hybrid flow sẽ được mô tả sau.
+## 1. Server flow
+Trong `Authorization Request` set `response_type = code`, `client` dùng `code` này để exchange các `token`\
+![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/openid_connect/SSO_OpenIdConnect_Server_Flow.png)
+
+## 2. Implicit flow
 TODO
-## 3. AWS OpenId Connect (OIDC)
-TODO
-
