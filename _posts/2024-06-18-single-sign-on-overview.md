@@ -54,15 +54,18 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
     &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb HTTP/1.1
   Host: server.example.com
 ```
+
 **Authentication response:** Response được tạo ra bởi `Authentication endpoint`
 
 `request_type` = `code`
+
 ```
   HTTP/1.1 302 Found
   Location: https://client.example.org/cb?
   code=SplxlOBeZQQYbYS6WxSbIA
   &state=af0ifjsldkj
 ```
+
 `request_type` = `token id_token`
 
 ```
@@ -74,6 +77,7 @@ VD: Endpoint của Google có dạng: https://oauth2.googleapis.com/token
   &expires_in=3600
   &state=af0ifjsldkj
 ```
+
 **Token request:** `POST` request được tạo ra bởi `Client` exchange `code` lấy `token`
 
 ```
@@ -85,6 +89,7 @@ POST /token HTTP/1.1
   grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
     &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
 ```
+
 **Token response:** Response được tạo ra bởi `Token endpoint`
 
 ```
@@ -115,5 +120,8 @@ Trong `Authorization Request` set `response_type = code`, `client` dùng `code` 
 ![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/openid_connect/SSO_OpenIdConnect_Server_Flow.png)
 
 ## 3. Implicit flow
-Trong `response_type` của `Implicit flow` không có `code`, request trực tiếp `token`, `id_token` hoặc `token id_token` đến `authentication endpoint`
+Trong `response_type` của `Implicit flow` không có `code`, request trực tiếp `token`, `id_token` hoặc `token id_token` đến `authentication endpoint`.\
 ![SSO OpenIdConnect]({{ site.baseurl }}/assets/img/openid_connect/SSO_OpenIdConnect_Implicit_Flow.png)
+
+# IV. SAML
+*Later*
