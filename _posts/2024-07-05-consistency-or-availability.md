@@ -50,7 +50,10 @@ Trong kiến trúc `clustered Redis`, khi có một thao tác ghi trên `Redis m
 
 Vì quá trình này diễn ra bất đồng bộ, nên nếu `Redis master` mất kết nối đến một trong số các `replica`, thao tác ghi trên `master` sẽ không được đồng bộ với replica đó.\
 Tuy nhiên, `Redis master` vẫn xác nhận thao tác ghi thành công. Do đó, dữ liệu trả về từ các `Redis replica` sẽ là dữ liệu cũ.\
-Điều này cho thấy rằng Redis (với cấu hình mặc định) ưu tiên hai tiêu chí **AP** (Availability và Partition Tolerance).
+Điều này cho thấy rằng Redis (với cấu hình mặc định) ưu tiên hai tiêu chí **AP** (Availability và Partition Tolerance).\
+Hệ quả của cách làm này là hệ thống sẽ luôn nhận được phản hồi từ Redis nhưng tồn tại rủi ro nếu `client` access dữ liệu của `replica` bị mất kết nối.\
+
+> Các bạn có tự hỏi làm cách nào để Redis tái đồng bộ lại các replica sau khi quá trình phân mảnh tạo ra không? Hẹn các bạn ở 1 bài viết khác nhé
 
 ![Redis & cap theorem]({{ site.baseurl }}/assets/img/consistency_vs_availability/redis_ap_oriented.png)
 
@@ -63,7 +66,9 @@ Khi có một thao tác ghi trên primary shard, các hành động sau sẽ đ�
 3. Chuyển tiếp `operation` cho toàn bộ `replica` liên quan
 4. Chỉ khi toàn bộ `replica` thực hiện thành công và phản hồi lại cho `primary shard`, lúc này `primary shard` mới xác nhận request của client là thành công.
 
-Như vậy, khác với `Redis`, `MongoDb` hướng tới 2 tiêu chí **CP** (Consistency & Partition tolerant)
+Như vậy, khác với `Redis`, `MongoDb` hướng tới 2 tiêu chí **CP** (Consistency & Partition tolerant)\
+`Client` sẽ không thể ghi dữ liệu cho đến khi `MongoDb` xác nhận quá trình ghi đến tất cả các `node` thành công.\
+Việc này đảm bảo tính nhất quán của dữ liệu, tối đa độ tin cậy đối với một CSDL.
 
 ![MongoDB & cap theorem]({{ site.baseurl }}/assets/img/consistency_vs_availability/mongo_cp_oriented.png)
 
