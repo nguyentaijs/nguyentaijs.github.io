@@ -6,6 +6,10 @@ tags: [discussion, distributed_system, system_design]
 date: 2024-07-05 21:42 +0700
 ---
 
+Có thực sự tồn tại một hệ thống phân tán đủ 3 yếu tố "Ngon bổ rẻ"? Định lý CAP và ứng dụng.
+Trong bài viết này, chúng ta sẽ khám phá các khái niệm cơ bản của tính nhất quán, tính sẵn sàng và khả năng chịu phân mảnh trong hệ thống phân tán, cùng với mối quan hệ của chúng với định lý CAP.\
+Đồng thời, chúng ta sẽ tìm hiểu cách mà Redis, MongoDB & Amazon RDS Multi-AZ ứng dụng nguyên tắc này.
+
 # I. Khái niệm
 
 ### Tính nhất quán (Consistency)
@@ -71,6 +75,31 @@ Như vậy, khác với `Redis`, `MongoDb` hướng tới 2 tiêu chí **CP** (C
 Việc này đảm bảo tính nhất quán của dữ liệu, tối đa độ tin cậy đối với một CSDL.
 
 ![MongoDB & cap theorem]({{ site.baseurl }}/assets/img/consistency_vs_availability/mongo_cp_oriented.png)
+
+# IV. Amazon RDS Multi-AZ và CAP theorem
+
+Amazon RDS (Relational Database Service) là dịch vụ do Amazon cung cấp để triển khai cơ sở dữ liệu quan hệ trên cloud.
+Amazon RDS tương thích với các cơ sở dữ liệu quan hệ phổ biến như: PostgreSQL, Mysql, MariaDB, SQL Server cho phép sử dụng mà tích hợp dễ dàng trên cloud.
+Kiến trúc của Amazon chia thành nhiều region, mỗi region có nhiều Availability Zone (AZ). Thông thường khách hàng sẽ lựa chọn triển khai dịch vụ trên nhiều AZ hoặc region vì các lợi ích mà nó mang lại.
+Amazon RDS cung cấp một dịch vụ như vậy có tên là Amazon RDS Mutli-AZ. Cơ chế mà Amazon RDS multi-AZ sử dụng để tăng khả năng chịu lỗi và đảm bảo tính nhất quán là Synchronous replication
+### Cơ chế Synchronous replication
+
+Synchronous replication học tập cách `MongoDB` xử lý đồng bộ dữ liệu giữa các node. Cụ thể như sau
+
+1. Primary instance nhận yêu cầu ghi từ client
+2. Primary instance ghi dữ liệu vào `transaction log` của primary instance
+3. Primary instance thực thi lệnh ghi
+4. Chuyển `transaction log` sang replica instance
+5. Replica instance ghi dữ liệu vào `transaction log` của mình
+6. Replica instance thực thi lệnh ghi
+7. Replica instance gửi xác nhận **(ACK)** cho primary instance rằng thay đổi đã được thực thi thành công
+8. Primary instance gửi phản hồi hoàn thành transaction về client
+
+Nhờ có quá trình trên mà RDS Multi-AZ có thể tự động failover sang replica khi phát sinh sự cố trên primary.
+Đánh đổi cho tính nhất quán là việc phải chờ đợi đồng bộ thao tác từ các node làm tăng độ trễ và ảnh hưởng đến throughput (giảm availability).\
+Lựa chọn này phù hợp với các hệ thống yêu cầu tính nhất quán cao và không chấp nhận mất mát dữ liệu.
+
+![Amazon RDS MutliAZ]({{ site.baseurl }}/assets/img/consistency_vs_availability/aws_2AZ.png)
 
 Bài viết lấy cảm hứng từ [Grokking Webinar - Sự đánh đổi giữa tính Consistency và Availability trong các database cluster](https://www.youtube.com/watch?v=P62lCiZKZgo)\
 Cảm ơn Grokking đã có những buổi chia sẻ sâu và chất lượng.
