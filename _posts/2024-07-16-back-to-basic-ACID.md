@@ -1,15 +1,15 @@
 ---
 layout: post
 title: Back to basic - ACID
-categories: [discussion, data_base]
-tags: [discussion, data_base]
+categories: [discussion, database, transaction]
+tags: [discussion, database, transaction]
 date: 2024-07-16 20:22 +0700
 ---
 
 Chắc hẳn anh em đã từng nghe 4 tính chất quan trọng cần đảm bảo trong xử lý transaction của database bao gồm tính nguyên tử, tính nhất quán, tính cô lập và tính bền vững (**ACID**).\
 Các bài viết về chủ đề này cũng không ít nhưng tôi vẫn muốn cùng anh em ôn lại một lần nữa và tìm hiểu xem bằng cách nào mà **Mysql** có thể vỗ ngực là mình đạt đủ 4 tính chất trên.
 
-![Back to basic | ACID or Acid]({{ site.baseurl }}/assets/img/acid-or-acid.png)
+![Back to basic ACID or Acid]({{ site.baseurl }}/assets/img/acid-or-acid.png)
 
 # 1. Tính Nguyên tử (Atomicity)
 Tại sao lại là nguyên tử? Ở đây chúng ta đã mượn khái niệm của vật lý là nguyên tử để nói về tính chất đầu tiên này, vì bản chất của nguyên tử cũng là điều mà mọi transaction cần phải có.
