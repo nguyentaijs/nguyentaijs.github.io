@@ -167,7 +167,7 @@ Phantom read hiểu nôm na là **đang đọc thì gặp ma**, cụ thể là k
 3. T2 commit
 3. T1 đọc lại: `SELECT * FROM employees WHERE department = 'Sales'` -> **11 kết quả**
 
-T1 lần đầu thực hiện truy vấn ra 10 kết quả, lần thứ 2 cùng truy vấn này ra 11 kết quả. T1 kiểu: "What? Ma làm à?".
+T1 lần đầu thực hiện truy vấn ra 10 kết quả, lần thứ 2 cùng truy vấn này ra 11 kết quả. T1 kiểu: "Wait what???".
 Với T1, record mới được thêm vào được xem là một phantom record, nó không hề tồn tại ở truy vấn trước.
 
 Mysql InnoDB set `Repeatable read` là default isolation level có lẽ vì sự cân bằng giữa data consistency và performance.
@@ -179,7 +179,7 @@ Mysql InnoDB set `Repeatable read` là default isolation level có lẽ vì sự
 > The default isolation level for InnoDB. It prevents any rows that are queried from being changed by other transactions, thus blocking non-repeatable reads but not phantom reads. It uses a moderately strict locking strategy so that all queries within a transaction see data from the same snapshot, that is, the data as it was at the time the transaction started.
 
 ### Serializable - The ultimate raid boss
-Anh này giải quyết hết các vấn đề của ba anh kia đẻ ra. Luôn đảm bảo tính tuần tự của giao dịch, ngăn chặn mọi sung đột đọc/ghi.\
+Anh này giải quyết hết các vấn đề của ba anh kia đẻ ra. Luôn đảm bảo tính tuần tự của giao dịch, ngăn chặn mọi xung đột đọc/ghi.\
 Anh trai 3 không - không dirty read, không non-repeatable read, không phantom read. Tật gì anh cũng tránh xa thì anh này chắc chắn 10 điểm nhưng bị cái anh chậm.
 
 1. T1 start transaction

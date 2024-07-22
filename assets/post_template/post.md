@@ -12,3 +12,5 @@ xxx
 
 
 
+Tài liệu về B tree và B+ tree
+https://www.youtube.com/watch?v=aZjYr87r1b8
