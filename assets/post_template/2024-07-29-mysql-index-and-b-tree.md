@@ -11,14 +11,12 @@ date: 2024-07-16 20:22 +0700
 "Query chậm à? Set index thôi chứ còn chờ gì nữa bạn ei"\
 "Tôi set index JOIN bạn set index WHERE. Cứ thế mà làm"\
 Nắm bí kíp trong tay, đôi bạn hí hửng chia nhau set hơn chục cái index. Tốc độ query giảm từ 5s về 0.5s, hơn cả mong đợi, sếp tin tưởng bảo từ giờ optimize cứ ném cho 2 thằng em của anh (là dễ).\
-Bẵng đi một thời gian, đôi bạn lại nhận được thêm một cái task optimize nữa xử lý việc người dùng complain hiện tại tạo order phải chờ hơn chục giây.\
+Bẵng đi một thời gian, đôi bạn nhận được thêm một task optimize nữa xử lý việc người dùng complain hiện tại tạo order phải chờ hơn chục giây.\
 Đôi bạn bàng hoàng nhận ra cái ngày performance bắt đầu lao dốc cũng chính là ngày mà đôi bạn submit task optimize optimize đầu tiên của đời mình.
 
 
 Index có phải là lời giải cho tất cả các yêu cầu optimize query?\
-Một anh senior nói phải cân nhắc set index sao cho hợp lý em nhé. Nhưng thế nào là hợp lý thì các anh lại không nói.
-Thôi để tôi cùng anh em định nghĩa từ hợp lý của ông senior kia nhé.
-Bài viết này sẽ giúp anh em hiểu và tự tin trả lời các câu hỏi phỏng vấn về Mysql index.
+Bài viết này sẽ giúp anh em hiểu và tự tin set index chuẩn chỉ như một nhẫn giả.
 
 # 1. Tính Nguyên tử (Atomicity)
 Tại sao lại là nguyên tử? Ở đây chúng ta đã mượn khái niệm của vật lý là nguyên tử để nói về tính chất đầu tiên này, vì bản chất của nguyên tử cũng là điều mà mọi transaction cần phải có.
