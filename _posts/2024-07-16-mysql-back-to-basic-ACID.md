@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Back to basic - ACID
-categories: [discussion, database, transaction]
-tags: [discussion, database, transaction]
+title: Mysql - Back to basic - ACID
+categories: [discussion, database, transaction, mysql]
+tags: [discussion, database, transaction, mysql]
 date: 2024-07-16 20:22 +0700
 ---
 
