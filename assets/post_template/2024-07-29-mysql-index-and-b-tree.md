@@ -17,49 +17,58 @@ Bẵng đi một thời gian, đôi bạn thân được sếp tin tưởng giao
 Index có phải là lời giải cho tất cả các yêu cầu optimize query?\
 Bài viết này sẽ giúp anh em hiểu và tự tin set index chuẩn như quân đội.
 
-# I. Hiểu về index
-
-## 1. Vì sao cần có index
+# I. Các khái niệm cơ bản
 
 Cách dữ liệu được tổ chức trên ổ cứng
 
-### Bài toán
-
-Anh em cùng tôi thử lên ý tưởng xây dựng một database clone của Mysql siêu cơ bản cho phép `INSERT` và `SELECT` dữ liệu thí sinh bao gồm `họ và tên` và `số thứ tự`.
-
-[Table of records](image)
-
-**1. Khai báo kiểu dữ liệu**
-
-Số báo danh\
-Tôi đặt kiểu `INT` với kích thước 4 bytes, như vậy tôi có thể lưu được các giá trị từ 0 - 4,294,967,295.\
-Họ và tên\
-Họ và tên phải là một chuỗi ký tự kích thước không cố định, nên tôi sẽ tạo 1 kiểu `VARCHAR(50)`: một chuỗi cho phép lưu tối đa 50 ký tự có 1 byte đầu tiên xác định kích thước của chuỗi, phần còn lại tôi lưu giá trị thực của chuỗi. Như vậy kích thước tối đa cho cột này là `1 + 50 * 4 = 201 bytes`
-
-**2. Tổ chức dữ liệu trên ổ cứng**
-
-Xong phần khai báo kiểu dữ liệu, bây giờ lưu dữ liệu xuống ổ cứng như thế nào?\
-Đơn giản nhất là tôi lưu theo dạng mảng tuần tự, tôi khoanh vùng 1GB trên ổ cứng dành riêng cho việc lưu dữ liệu không cho phép các ứng dụng khác truy cập vào vùng nhớ này.
-Nếu dữ liệu mới được thêm vào, tôi chỉ đơn giản append record mới nối tiếp vào record trước đó. Tuyệt vời! Độ phức tạp của lệnh `INSERT` là **O(1)**.\
-Dữ liệu của bảng trên sẽ được sắp xếp tuần tự như hình dưới.
+## Bài toán thực tế
+Bài toán rất đơn giản, A mới được bổ nhiệm làm quản lý 100 giường bệnh của một bệnh viện, yêu cầu mỗi bệnh nhân nằm riêng 1 phòng.
+Các bệnh nhân có thể trùng tên nên tôi in lên áo cho từng bệnh nhân 2 thông số mã bệnh nhân và họ tên.
 
 [Data section](image)
 
-**3. Tìm kiếm dữ liệu**
+**Tìm kiếm bệnh nhân - Cuộc sống không có index**\
+Tại một thời điểm bất kỳ trong ngày, bác sĩ sẽ đến khám riêng cho từng bênh nhân hoặc một nhóm bệnh nhân.
+Bác sĩ cung cấp một danh sách các mã bệnh nhân và yêu cầu A cho họ biết các bệnh nhân này ở phòng nào.
+A phải đi hết 100 phòng, hỏi từng bệnh nhân, đối chiếu với mã bệnh nhân của bác sĩ để lấy được danh sách hoàn chỉnh.
 
-Insert thì ngon rồi đấy, nhưng mà việc tìm kiếm dữ liệu trên mảng này yêu cầu phải duyệt từ đầu section đến cuối để tìm ra giá trị hợp lệ. Độ phức tạp của phương pháp này là **O(n)** với n là tổng số byte của các records.
-Ở ví dụ trên là 269 bytes, 1 con số quá lớn cho 5 records. Có phương pháp nào giảm số bước nhảy `n` xuống ngang bằng với số record không?
+**Index và cuốn sổ cái**\
+Sau 1 thời gian làm việc ở đây, chân A to lên hẳn vì ngày nào anh cũng chạy qua chạy lại 100 phòng đến hơn chục lượt.
+Cái cần to thì không to, A quyết định lần này là lần cuối, A đi hết 100 phòng, mỗi phòng A dừng lại và mapping thông tin bệnh nhân và số phòng vào một **cuốn sổ cái**.
+Từ các lần tiếp theo, khi có yêu cầu, A chỉ cần giở cuốn sổ ra và thống kê lại danh sách phòng cho bác sĩ. Chân của A từ đó lại bắt đầu teo tóp dần.
 
-[Search without index](image)
+Giám đốc bệnh viện thấy A dạo này rảnh quá, yêu cầu anh A quản lý 10.000 phòng khám.
+Đau một lần rồi thôi, A cũng lại đi thống kê toàn bộ vào cuốn sổ cái của mình, nhưng cuốn sổ của A dày lên trông thấy.
+Mỗi lần bác sĩ đến khám, A dò trong cuốn sổ cái của mình 10.000 dòng. Giờ chân A không to nhưng mắt A bắt đầu nhoè dần sau 1 tuần làm việc.
 
-**4. Sự ra đời của index**
+**B-tree index**\
+A đọc được cách tổ chức Index của Mysql sử dụng **B+ tree**, A thử áp dụng bằng cách chia cuốn sổ cái của mình thành 1000 cuốn sổ nhỏ, mỗi cuốn có 100 dòng, rồi chia theo dạng cây cân bằng vào các ngăn.\
+Ngăn lớn dán nhãn mã từ 1 -> 10.000, rồi tiếp tục từ 10.001 -> 20.000, tổng cộng có 10 ngăn.
+Trong mỗi ngăn lớn lại chia thành 10 ngăn nhỏ, mã từ 1 -> 1.000, 1.001 -> 2.000, như vậy một ngăn chỉ còn có 10 cuốn sổ nhỏ.
+Giả sử cần tìm bệnh nhân mã số = 1890
 
-Nhận thấy trường `so_bao_danh` là duy nhất và có thể đại diện cho 1 record. Tôi tạo thêm một vùng nhớ nhỏ chỉ để lưu `pointer` đến trường `so_bao_danh` của mỗi record - gọi nó là `Index section`.
-Lúc này, thay vì tìm kiếm trên toàn bộ `Data section`, tôi thực hiện tìm kiếm trên `Index section`, nếu tìm thấy giá trị mong muốn, thực hiện lấy dữ liệu record từ `Data section` với `pointer` tìm được. Độ phức tạp vẫn là O(n) nhưng `n` đã giảm từ 269 xuống vỏn vẹn còn 5 bước.
+1. Ở ngăn ngoài cùng, A so sánh 1 < 1890 < 10.000, do đó A biết cần tìm trong ngăn này
+2. A tìm trong ngăn 1 -> 10.000, trong ngăn này tìm ngăn con 1001 < 1890 < 2000.
+3. Ngăn cuối cùng này có 10 cuốn mỗi cuốn 1000 dòng, cuốn sổ cái thứ 9 lưu mã từ 1801 -> 1900 sẽ cuốn sổ mà A cần tìm.
 
-[Search with index](image)
+Index là một cấu trúc dữ liệu giúp tăng tốc độ truy vấn và thao tác dữ liệu trong các bảng. Chỉ mục được tạo trên một hoặc nhiều column và hoạt động như một cuốn sổ cái để tìm kiếm và truy xuất dữ liệu mà không cần quét toàn bộ bảng.
+Ví dụ trên chỉ lấy ý tưởng từ cách Mysql sử dụng B Tree để đánh chỉ mục. Bây giờ anh em cùng tôi tìm hiểu thế nào là một cấu trúc B tree chuẩn chỉ.
 
-**5. B-tree typed index**
+## B-tree (Balanced Tree)
 
-Nếu theo thời gian dữ liệu nở rộng đến 1 triêu, 2 triệu record thì việc truy vấn với độ phức tạp O(n) vẫn phát sinh các vấn đề về performance.
-Tôi học Mysql sử dụng cấu trúc `B+ Tree` để tổ chức index, với cách tiếp cận này, độ phức tạp giảm mạnh từ O(n) xuống **O(log(n))**. Chỉ với vài bước nhảy, tôi đã có thể tìm được record mong muốn trong hơn triệu records. Cùng tham khảo hình dưới
+B-tree còn được gọi là cây tự cân bằng. Cấu trúc dữ liệu này giải quyết giới hạn của Binary tree (Cây nhị phân), một node của B-tree có thể lưu nhiều giá trị cùng lúc rút ngắn chiều dài của cây.
+Các đặc tính của B-tree bao gồm:
+
+- Các node lá (leaf) luôn cùng cấp với nhau.
+- Quy định giá trị minimum degree (T), là số giá trị tối thiểu của một node khi quyết định có sinh node mới hay không.
+- Tất cả các node ngoại trừ root phải có ít nhất `T-1` giá trị.
+- Tất cả các node bao gồm root node chỉ có thể có nhiều nhất `2T - 1` giá trị.
+- Số node con của một node cha bất kỳ bằng số giá trị của node + 1.
+- Tất cả các giá tị của node được sắp xếp theo thứ tự tăng dần. Con của k1 và k2 luôn có giá trị nằm trong khoảng k1 < child node < k2.
+- Độ phức tạo của các thao tác cơ bản như INSERT, DELETE, SELECT đều bằng nhau và bằng O(log(n))
+
+## Multi-column index
+Mysql hỗ trợ index gộp (composite index) sử dụng nhiều column để đánh chỉ mục cho dữ liệu, số lượng column không vượt quá 16 colunm.
+
+
+
