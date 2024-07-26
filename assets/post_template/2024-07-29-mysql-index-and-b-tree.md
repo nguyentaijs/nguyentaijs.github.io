@@ -43,9 +43,9 @@ Giám đốc bệnh viện thấy dạo này A rảnh, ông cất nhắc A lên 
 Rút kinh nghiệm, a chấp nhận đau một lần rồi thôi, A cũng lại đi thống kê toàn bộ vào cuốn sổ cái của mình, nhưng cuốn sổ của A chằng chịt toàn chữ, dày lên trông thấy.
 Mỗi lần bác sĩ đến khám, A dò 10.000 dòng trong cuốn sổ cái của mình. Chân A không còn đau nhưng mắt A bắt đầu nhoè dần sau 1 tuần làm việc.
 
-**B-tree index**\
-A đọc được cách tổ chức Index của Mysql sử dụng **B tree**, thử áp dụng bằng cách chia cuốn sổ cái của mình thành 1000 cuốn sổ nhỏ, mỗi cuốn 100 dòng, rồi chia theo dạng cây cân bằng vào giá sách có nhiều ngăn.\
-Ngăn lớn dán nhãn mã từ 1 -> 10.000, rồi tiếp tục từ 10.001 -> 20.000, tổng cộng có 10 ngăn.
+**Chia để trị**\
+A thử chia cuốn sổ cái của mình thành 1000 cuốn sổ nhỏ, mỗi cuốn 100 dòng, rồi chia theo dạng cây cân bằng vào giá sách có nhiều ngăn.\
+Ngăn lớn ngoài cùng dán nhãn mã từ 1 -> 10.000, rồi tiếp tục từ 10.001 -> 20.000, tổng cộng có 10 ngăn.
 Trong mỗi ngăn lớn lại chia thành 10 ngăn nhỏ, mã từ 1 -> 1.000, 1.001 -> 2.000, như vậy một ngăn chỉ còn có 10 cuốn sổ nhỏ.
 Giả sử cần tìm bệnh nhân mã số = 1.890
 
@@ -61,12 +61,53 @@ Chỉ cần 3 bước tìm kiếm, A tìm ra được phòng bệnh nhân mong m
 > This is much faster than reading every row sequentially.
 
 Index là một cấu trúc dữ liệu giúp tăng tốc độ truy vấn và thao tác dữ liệu trong các bảng. Chỉ mục được tạo trên một hoặc nhiều column và hoạt động như một cuốn sổ cái để tìm kiếm và truy xuất dữ liệu mà không cần quét toàn bộ bảng.\
-Dữ liệu càng lớn thì vai trò của index càng trở nên rõ ràng. Ngoài ra, Mysql còn hỗ trợ composite index (hay multi-column index) đánh chỉ mục trên nhiều cột đồng thời.
-Ví dụ trên chỉ lấy ý tưởng từ cách Mysql sử dụng B Tree để đánh chỉ mục. Bây giờ anh em cùng tôi tìm hiểu thế nào là một cấu trúc B tree chuẩn chỉ.
+Dữ liệu càng lớn thì vai trò của index càng trở nên rõ ràng hơn. Ngoài ra, Mysql còn hỗ trợ composite index (hay multi-column index) đánh chỉ mục trên nhiều cột đồng thời.
 
-# B-tree (Balanced Tree)
+## Phân loại
+Mysql hỗ trợ nhiều loại index đáp ứng các cách đánh chỉ mục khác nhau.
+
+**PRIMARY KEY**\
+Primary key đảm bảo có thể xác định một record duy nhất.
+- Non-nullable: không cho phép giá trị NULL
+- Uniqueness: không chấp nhận giá trị trùng lặp
+- Column được khai báo làm PRIMARY KEY sẽ được tự động đánh index
+- Không thể khai báo 2 PRIMARY KEY trong một table.
+
+**UNIQUE**\
+Tương tự như PRIMARY KEY, UNIQUE đảm bảo các giá trị trong index là duy nhất.
+Điều thú vị là UNIQUE index cho phép NULL và còn cho phép nhiều NULL values cùng tồn tại.
+
+**INDEX**\
+Thoáng hơn cả 2 anh trên, loại index này cho phép null, cho phép giá trị trùng lặp. Không có ràng buộc gì đặt biệt.
+
+**FULLTEXT**\
+Chỉ hỗ trợ các kiểu dữ liệu CHAR, VARCHAR và TEXT, được sử dụng để thực hiện các truy vấn theo ngôn ngữ tự nhiên `WHERE MATCH ... AGAINST`. Duy trì các index dạng này tốn nhiều tài nguyên hơn, đặc biệt với các bảng lớn.
+
+**SPATIAL**\
+Được thiết kế để hỗ trợ truy vấn cho dữ liệu không gian. Thực tế tôi cũng chưa được kinh qua món này nên chỉ để đây và không nói gì.
+
+**Multi-column index (Composite index)**\
+Khác với các loại trên, index loại này cho phép đánh chỉ mục trên nhiều column. Giả sử tôi có 1 multi-column index (col1, col2, col3), index này cũng tương đương với index(col1), index(col1, col2), index(col1, col2, col3)
+
+```sql
+CREATE INDEX col123 ON my_table(col1, col2, col3);
+
+SELECT * FROM my_table WHERE col1 = 1;
+-- Sử dụng index của col123 tương đương index(col1)
+
+
+SELECT * FROM my_table WHERE col1 = 1 and col2 = 'a';
+-- Vẫn có thể sử dụng index của col123 tương đương index(col1, col2)
+
+
+SELECT * FROM my_table WHERE col1 = 1 and col2 = 'a' col3 = 'b';
+-- Sử dụng index của col123
+```
+
+## B-tree (Balanced Tree)
 
 B-tree còn được gọi là cây tự cân bằng. Cấu trúc dữ liệu này giải quyết giới hạn của Binary search tree (Cây tìm kiếm nhị phân), một node của B-tree có thể lưu nhiều giá trị cùng lúc rút ngắn chiều dài của cây.
+Hầu hết các loại index của Mysql (PRIMARY KEY, UNIQUE, INDEX, FULLTEXT) đều sử dung B-tree.
 Các đặc tính của B-tree bao gồm:
 
 - Các node lá (leaf) luôn cùng cấp với nhau.
@@ -77,7 +118,39 @@ Các đặc tính của B-tree bao gồm:
 - Tất cả các giá tị của node được sắp xếp theo thứ tự tăng dần. Con của k1 và k2 luôn có giá trị nằm trong khoảng k1 < child node < k2.
 - Độ phức tạo của các thao tác cơ bản như INSERT, DELETE, SELECT đều bằng nhau và bằng O(log(n))
 
-# Các câu hỏi phỏng vấn về index thường gặp
+## Index optimization không phải là kiếm thánh
+
+### Use the right tool for the right job
+Trước khi lao đầu vào cuộc chơi anh em phải biết mình có đang đi đúng hướng hay không.
+Hãy bắt đầu bằng việc phân tích dựa trên các sự thật, thu thập nhiều thông tin nhất có thể dựa vào các log hệ thống (CPU, memory, system log...), các log của Mysql (error log, slow query log,..), log của từng service tham gia vào luồng cần tối ưu.
+Tìm cách tái hiện được lỗi trên môi trường test. Khi anh em đã có cái nhìn tổng quan và các số liệu cần thiết, anh em sẽ có thể chỉ ra cụ thể vấn đề nằm ở đâu, không phải lúc nào database optimization cũng là giải pháp.
+
+### Các lưu ý khi quyết định set index
+
+**Số lượng record lớn**\
+Độ hiệu quả của index tỉ lệ thuận với kích thước của bảng. Bảng có càng nhiều record thì càng cần phải cân nhắc set index cho các column thường được sử dụng cho câu lệnh điều kiện.
+
+**Tỉ lệ trùng lặp thấp**\
+Index nên có tỉ lệ trùng lặp thấp. Lí tưởng nhất là các index type = UNIQUE, 1 index tương đương với 1 record.
+Nếu anh em set index cho column kiểu boolean (TINYINT(1)) chỉ chấp nhận 2 giá trị TRUE/FALSE trên hàng triệu record, index sẽ không tạo ra nhiều khác biệt.
+
+Quá trình optimize nên được chia thành 3 phase
+
+- Phân tích vấn đề
+- Tìm kiếm giải pháp
+- Optimize
+- Theo dõi và đánh giá
+
+### Phân tích vấn đề
+
+**Tìm bottle neck**\
+Database đặc biệt là database được chia sẻ bởi nhiều components như trong hệ thống monolithic thường có nguy cơ gặp các vấn đề về performance nhiều hơn. Nhưng không phải lúc nào điểm nghẽn cũng nằm ở database, và không phải lúc nào set index cũng giải quyết được các vấn đề.
+Tránh suy đoán sẽ dễ sa đà vào bẫy thiên kiến xác nhận. Hãy bắt đầu bằng việc phân tích dựa trên các sự thật, thu thập nhiều thông tin nhất có thể dựa vào các log hệ thống (CPU, memory, system log...), các log của Mysql (error log, slow query log,..), log của từng service tham gia vào luồng cần tối ưu.
+Tìm cách có tái hiện được lỗi trên môi trường dev không? Sau khi đã có cái nhìn tổng quan hơn, tập trung vào tìm kiếm bottle neck,
+đôi khi vấn đề nằm ở việc phản hồi chậm của các bên thứ 3 tích hợp với hệ thống, thì trọng tâm không phải là tối ưu ở mức database.
+
+**Tìm kiếm giải pháp**\
+Rồi, xác định được là vấn đề nằm ở database. Tôi sẽ tập trung làm rõ câu hỏi target là gì? Phải đáp ứng bao nhiêu TPS
 
 
 
