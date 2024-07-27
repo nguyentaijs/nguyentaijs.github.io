@@ -128,15 +128,15 @@ Tìm cách tái hiện được lỗi trên môi trường test. Khi anh em đã
 ### Các lưu ý khi quyết định set index
 
 **Nên set index ở đâu**\
-Ngoài các column được sử dụng làm điều kiện cho các câu lệnh WHERE, JOIN; query còn được hưởng lợi từ việc set index trong câu lệnh ORDER BY, GROUP BY, MIN/MAX.
+Để làm được việc này anh em cần thống kê danh sách các query được run, đánh giá theo 2 tiêu chí tuần suất sử dụng và độ phức tạp của query. Trong danh sách này, lọc ra các column được sử dụng cho câu lệnh điều kiện. Ngoài các column được sử dụng làm điều kiện cho các câu lệnh WHERE, JOIN; query còn được hưởng lợi từ việc set index trong câu lệnh ORDER BY, GROUP BY, MIN/MAX.
 Trong một số trường hợp, các column trong SELECT query cũng có thể được cân nhắc nếu có thể ứng dụng coverring index. Lúc này query truy vấn lấy dữ liệu trực tiếp từ vùng nhớ của index mà không cần ánh xạ sang record của bảng gốc.\
-Sau khi xem xét các điều kiện trên anh em sẽ có 1 dành sách các column làm ứng viên để đánh chỉ mục.
 
 ```
 -- composite index được set trên column col1 và col2
 CREATE INDEX idx_col1_col2 ON MY_TABLE(col1,col2);
 SELECT col2 FROM my_table WHERE col1 = val;
 ```
+Sau khi xem xét các điều kiện trên anh em sẽ có 1 dành sách các column làm ứng viên để đánh chỉ mục. việc tiếp theo là cân nhắc trong danh sách này column nào thực sự cần đánh index. Một số tiêu chí sau có thể giúp anh em lựa chọn index sao cho phù hợp.
 
 **Số lượng record phải đủ lớn**\
 Độ hiệu quả của index tỉ lệ thuận với kích thước của bảng. Bảng có càng nhiều record thì càng cần phải cân nhắc set index cho các column thường được sử dụng cho câu lệnh điều kiện.
@@ -145,6 +145,8 @@ SELECT col2 FROM my_table WHERE col1 = val;
 Nếu đang cân nhắc giữa nhiều column, hãy chọn column có tỉ lệ trùng lặp thấp. Thử tưởng tượng chỉ với 1 câi lệnh WHERE trên index column,anh em có thể lọc xuống còn 10 records trên tổng số 1 triệu record.
 Ngược lại, nếu anh em set index cho column kiểu boolean (TINYINT(1)) chỉ chấp nhận 2 giá trị TRUE/FALSE trên hàng triệu record, index sẽ không tạo ra nhiều khác biệt. Lí tưởng nhất là tạo các index type = UNIQUE, 1 index tương đương với 1 record.
 
+**Đánh giá tần suất dữ liệu bị thay đổi**
+Để làm được việc này anh em cần thống kê danh sách các query được run, đánh giá theo 2 tiêu chí tuần suất sử dụng và độ phức tạp của query. Trong danh sách này, lọc ra 
 
 Quá trình optimize nên được chia thành 3 phase
 
