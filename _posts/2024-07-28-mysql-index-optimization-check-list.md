@@ -2,7 +2,7 @@
 layout: post
 title: Mysql index optimization check list
 categories: [discussion, database, optimization, mysql]
-tags: [discussion, database, transaction]
+tags: [discussion, database, transaction, mysql]
 date: 2024-07-28 23:22 +0700
 ---
 
@@ -26,7 +26,7 @@ Bác sĩ cho A một danh sách các mã bệnh nhân và yêu cầu A cho họ 
 A đi hết 100 phòng, hỏi từng bệnh nhân, đối chiếu với mã bệnh nhân của bác sĩ để lấy được danh sách hoàn chỉnh.
 Hơi vất vả nhưng A vẫn hài long với công việc hiện tại. Bắp chân A to lên, rắn chắc, A thầm cảm ơn những ngày làm việc vất vả chạy qua chạy lại 100 phòng đến hơn chục lượt.
 
-![]({{ site.baseurl }}/assets/img/table-benh-nhan.png)
+![]({{ site.baseurl }}/assets/img/index_optimization/table-benh-nhan.png)
 
 **Index - cuốn sổ cái**\
 Nhưng một ngày A bệnh, A lết mãi mới được nửa vòng, A quyết định lần này là lần cuối, A đi hết 100 phòng, mỗi phòng A dừng lại và mapping thông tin bệnh nhân và số phòng vào một **cuốn sổ cái**.
@@ -34,7 +34,7 @@ Những lần tiếp theo, khi có yêu cầu, A chỉ cần giở cuốn sổ r
 Khi có bệnh nhân xuất viện hoặc nhập viện, A cập nhật lại trên cuốn sổ của mình, đảm bảo rằng thông tin trong cuốn sổ luôn chính xác.\
 Chỉ với một cuốn sổ nhỏ và một chút tỉ mỉ, công việc quản lý của A đã nhàn đi nhiều.
 
-![]({{ site.baseurl }}/assets/img/index.png)
+![]({{ site.baseurl }}/assets/img/index_optimization/index.png)
 
 Rảnh rang được một thời gian, A được cất nhắc lên tuyến trên quản lý 10.000 giường bệnh.
 Rút kinh nghiệm, A chấp nhận đau một lần rồi thôi, A cũng lại đi thống kê toàn bộ vào cuốn sổ cái của mình, nhưng cuốn sổ của A chằng chịt toàn chữ, dày lên trông thấy.
@@ -46,13 +46,13 @@ Các ngăn lớn ngoài cùng dán nhãn mã từ 1 -> 10.000, rồi tiếp tụ
 Trong mỗi ngăn lớn lại chia thành 10 ngăn nhỏ, mã từ 1 -> 1.000, 1.001 -> 2.000, như vậy một ngăn chỉ còn có 10 cuốn sổ nhỏ mỗi cuốn 100 bệnh nhân.
 Giả sử cần tìm bệnh nhân mã số = 1.890
 
-![]({{ site.baseurl }}/assets/img/slots.png)
+![]({{ site.baseurl }}/assets/img/index_optimization/slots.png)
 
 1. Ở ngăn lớn ngoài cùng, A so sánh 1 < 1.890 < 10.000, do đó A biết cần tìm trong ngăn này
 2. A tìm trong ngăn 1 -> 1.000, không thấy. Chuyển sang tìm trong ngăn có giá trị > 1.000, phát hiện ngăn con thoả mãn 1001 < 1890 < 2000.
 3. Ngăn trong cùng này có 10 cuốn mỗi cuốn 1.000 dòng, cuốn sổ cái thứ 9 lưu mã từ 1.801 -> 1.900 sẽ là cuốn sổ mà A cần tìm.
 
-![]({{ site.baseurl }}/assets/img/b-tree-index.png)
+![]({{ site.baseurl }}/assets/img/index_optimization/b-tree-index.png)
 
 Chỉ cần 3 bước tìm kiếm, A tìm ra được phòng bệnh nhân mong muốn. Cuốn sổ cái trong ví dụ trên tương tự với khái niệm index trong các hệ cơ sở dữ liệu. Sử dụng một vùng nhớ nhỏ để lưu giá trị của column có tính đại diên, từ đó lấy được record tương ứng.
 
