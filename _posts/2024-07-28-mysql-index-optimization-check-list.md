@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Mysql index optimization check list
+title: Mysql - Index optimization check list
 categories: [discussion, database, optimization, mysql]
 tags: [discussion, database, transaction, mysql]
 date: 2024-07-28 23:22 +0700
 ---
 
-![Mysql index optimization check list]({{ site.baseurl }}/assets/img/acid-or-acid.png)
+![Mysql index optimization check list]({{ site.baseurl }}/assets/img/index_optimization/mysql-index-optimization.png)
 
 Vì sao sử dụng index có thể cải thiện tốc độ truy vấn?\
 Làm cách nào để xác định khi nào cần set index cho một column?
