@@ -126,18 +126,18 @@ Ngược lại, nếu anh em set index cho column kiểu boolean (`TINYINT(1)`) 
 
 **Lưu ý với column có tần suất thay đổi cao**\
 Anh em biết rằng đánh index cho column có thể hiểu là tạo một vùng nhớ khác phục vụ việc mapping giữa column và record, điều này đồng nghĩa là Mysql phải quản lý vùng nhớ này khi có bất kì thao tác ghi liên quan (`INSERT`/`UPDATE`/`DELETE`).
-Nếu column có tần suất thay đổi càng cao thì gánh nặng quản lý index càng tăng. Ví dụ nên đáng index trên những bảng theo cơ chế append only như bảng history với số lượng record nhiều và ít có thao tác `DELETE`/`UPDATE` một khi được khởi tạo.
+Nếu column có tần suất thay đổi càng cao thì gánh nặng quản lý index càng tăng. Ví dụ nên đánh index trên những bảng theo cơ chế append only như bảng history với số lượng record nhiều và ít có thao tác `DELETE`/`UPDATE` một khi được khởi tạo.
 
 **Sử dụng prefix index cho các column dạng chuỗi**\
 Thực tế việc set index cho các column chuỗi kích thước lớn không được khuyến khích, nhưng nếu cần phải set index cho trường hợp này anh em có thể áp dụng `prefix index`.
-Thay vì set index cho nguyên column (đặc biệt là dạng chuỗi không có kích thước cố định như `VARCHAR/TEXT`) , anh em có thể set index cho `n` bytes đầu tiên của chuỗi để cải thiện performance.
+Thay vì set index cho nguyên column (đặc biệt là dạng chuỗi không có kích thước cố định như `VARCHAR/TEXT`) , anh em có thể set index cho `n` ký tự đầu tiên của chuỗi để cải thiện performance.
 
 ```sql
 CREATE INDEX idx_prefix ON MY_TABLE(col1(3)); -- prefix index được set trên 3 ký tự đầu tiên của column col1
 
-SELECT * FROM my_table WHERE col1 like 'val%'; -- có sử dụng prefix
-SELECT * FROM my_table WHERE col1 like '%val'; -- không sử dụng prefix vì search like 3 phần tử cuối
-SELECT * FROM my_table WHERE col1 = 'xx'; -- có sử dụng index vì 'xx' chỉ có 2 ký tự <= 3 ký tự
+SELECT * FROM my_table WHERE col1 LIKE 'val%'; -- có sử dụng prefix
+SELECT * FROM my_table WHERE col1 LIKE '%val'; -- không sử dụng prefix vì search like 3 phần tử cuối
+SELECT * FROM my_table WHERE col1 = 'xx'; -- có sử dụng index vì 'xx' chỉ có 2 ký tự <= 3 ký tự của index
 ```
 
 **Sử dụng multi-column index**\
@@ -148,8 +148,9 @@ Ngoài các column được sử dụng làm điều kiện cho các câu lệnh
 CREATE INDEX col123 ON my_table(col1, col2, col3);
 
 SELECT * FROM my_table WHERE col1 = 1; -- Sử dụng index của col123 tương đương index(col1)
-SELECT * FROM my_table WHERE col1 = 1 and col2 = 'a'; -- Vẫn có thể sử dụng index của col123 tương đương index(col1, col2)
-SELECT * FROM my_table WHERE col1 = 1 and col2 = 'a' col3 = 'b'; -- Sử dụng index của col123
+SELECT * FROM my_table WHERE col1 = 1 AND col2 = 'a'; -- Vẫn có thể sử dụng index của col123 tương đương index(col1, col2)
+SELECT * FROM my_table WHERE col1 = 1 AND col2 = 'a' col3 = 'b'; -- Sử dụng index của col123
+SELECT col1, col2 FROM my_table WHERE col1 = 1 ORDER BY col2; -- Sử dụng index của col123
 ```
 
 **Sử dụng covering index**\
