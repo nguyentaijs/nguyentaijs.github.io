@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Mysql database optimization
-categories: [discussion, database, optimization]
-tags: [discussion, database, optimization]
+title: Mysql database
+categories: [discussion, database]
+tags: [discussion, database]
 date: 2024-06-22 15:07 +0700
 ---
 
