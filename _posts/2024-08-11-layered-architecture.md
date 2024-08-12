@@ -1,3 +1,11 @@
+---
+layout: post
+title: Layered architecture - kiến trúc quốc dân
+categories: [discussion, system_design]
+tags: [discussion, system_design]
+date: 2024-08-11 22:22 +0700
+---
+
 # 0. Architecture partitioning
 Trước khi đi vào chi tiết, anh em cần nắm rõ hai cách thực hiện architecture partitioning thường được sử dụng trong thiết kế hệ thống\
 Architecture partitioning được hiểu là tiêu chí cơ bản để mô hình hóa kiến trúc hệ thống. Đơn giản ví dụ để hệ thống hóa cấp học trung học phổ thông ta có ít nhất 2 cách; đầu tiên có thể chia theo lớp (10, 11, 12), trong mỗi lớp có các môn Toán, Lí, Hóa, Văn, Sử, Địa; hoặc có thể chia theo môn học, Toán có Toán lớp 10, Toán lớp 11, Toán lớp 12, nhưng đều gọi chung là Toán THPT.\
@@ -51,8 +59,9 @@ Tầng trên có thể sử dụng các chức năng mà các tầng dưới cun
 Tầng dưới có trách nhiệm thực thi yêu cầu được gửi từ các tầng trên, và không có phụ thuộc ngược lại tầng trên.
 
 # 2. Kiến trúc cơ bản
-Như đã nói ở trên không có quy định rõ rành về số lượng tầng và chức năng của mỗi tầng nhưng về cơ bản kiến trúc sẽ có 4 tầng\
+Như đã nói ở trên không có quy định rõ rành về số lượng tầng và chức năng của mỗi tầng nhưng về cơ bản kiến trúc sẽ có 4 tầng
 
+![layered_architecture.png]({{ site.baseurl }}/assets/img/layered_architecture/layered_architecture.png)
 **Presentation**\
 Xử lý tương tác với người dùng cuối, thường là xử lý UI, validate user input, xây dựng UI dựa trên dữ liệu được trả về từ tầng `application`; đồng thời cũng là trung chuyển yêu cầu của người dùng cuối sang tầng `application` để xử lý yêu cầu của người dùng.
 
@@ -73,6 +82,8 @@ Bắt buộc một request từ tầng trên phải gọi trực tiếp xuống 
 
 > Presentation -> Business -> Persistence -> Database
 
+![closed]({{ site.baseurl }}/assets/img/layered_architecture/closed.png)
+
 Cách làm này ứng dụng khái niệm **Layers of isolation**, đảm bảo rằng một thay đổi ở một tầng không (hoặc ít) ảnh hưởng các tầng khác phụ thuộc vào nó.\
 Việc này giúp cho hệ thống trở nên tường minh, dễ hiểu, dễ bảo trì hơn, giảm thiểu đa phụ thuộc (interdependencies) giữa các tầng, tầng ở trên chỉ phụ thuộc vào tầng liền dưới nó.\
 Phù hợp với hệ thống yêu cầu tính ổn định, bảo mật và dễ bảo trì.
@@ -86,6 +97,9 @@ Giả sử kiến trúc có thêm 1 layer nữa
 Một request có thể đi qua cả 5 tầng như `closed layer`, nhưng cũng có thể bỏ qua lớp trung gian `services layer` nếu cần thiết
 
 > Presentation -> Business -> Persistence -> DB
+
+
+![open]({{ site.baseurl }}/assets/img/layered_architecture/open.png)
 
 Open layer mang lại sự linh hoạt cho hệ thống, tăng hiệu suất do có thể bỏ qua các layer trung gian thực tế chỉ làm vai trò forward yêu cầu xuống lớp bên dưới (Layer bloat/ pass-through layer).\
 Nhược điểm của phương pháp này là làm giảm tính mô-dun, khó bảo trì và kiểm thử, cần nhiều công sức để tạo và cập nhật tài liệu giải thích.\
@@ -104,25 +118,45 @@ Nếu 80% số lượng request xảy ra tình trạng này thì cần phải c�
 - Chuyển layer từ closed sang open và ngược lại
 - Gộp 2 layer thành một layer mới có chức năng của cả hai
 
-# 5. Phù hợp
+# 5. Nên
 
-**Ngon bổ rẻ**\
-Các hệ thống nhỏ, chi phí thấp, yêu cầu khắt khe về thời gian hoàn thành dự án. Anh em sẽ có thể bắt tay vào xây dựng ngay một kiến trúc đáp ứng được yêu cầu của dự án, không cần mất quá nhiều thời gian cho việc cân nhắc, phân tích và chia nhỏ theo domain như một vài pattern khác.
-Việc chia team theo technical cũng đơn giản, anh nào làm FE thì có trách nhiệm xử lý tầng presentation, anh nào làm BE thì xử lý business và persistence, anh nào làm database thì tập trung vào database. Rất nhanh chóng anh em đã có thể form một team chiến mọi dự án theo kiến trúc phân tầng.
+**Nhanh - gọn - lẹ**\
+Các hệ thống nhỏ, chi phí thấp, yêu cầu khắt khe về thời gian hoàn thành dự án.
+Với những dự án kiểu này, việc xây dựng nguyên một hệ thống lớn với kiến trúc phức tạp là không cần thiết. Thay vì dành thời gian cho việc cân nhắc, phân tích và chia nhỏ theo domain như một vài pattern khác;
+anh em hãy bắt tay vào xây dựng ngay một kiến trúc dạng layered đáp ứng được yêu cầu của dự án. Tất nhiên việc đánh giá scope phải khách quan và chính xác để đưa ra nhận định về độ phức tạp và size của dự án.
+Việc chia team theo technical cũng đơn giản, anh nào làm FE thì có trách nhiệm xử lý tầng presentation, anh nào làm BE thì xử lý business và persistence, anh nào làm database thì tập trung vào database.
+Rất nhanh chóng anh em đã có thể form một team chiến mọi dự án theo kiến trúc phân tầng.
 
 **Technical oriented**\
-Nếu phần lớn các yêu cầu thay đổi của dự án thiên về technical. Ví dụ như dự án yêu cầu xây dựng hệ thống quản lý tập trung có thể access được bằng mọi thiết bị, phase đầu tiên triển khai trên nền web, sau đó mở rộng ra các thiết bị di động khác; có thể thấy logic xử lý là như nhau cho tầng `business`, anh em có thể giới hạn chỉ cần mở rộng tầng `presentation` là có thể đáp ứng yêu cầu của đề bài.
-# 6. Không phù hợp
-**Operation concerns**
-Layered architecture lộ rõ khuyết điểm khi ứng dụng cho các hệ thống yêu cầu khả năng mở rộng cao (scalable), khả năng chịu lỗi (fault tolerance) hay tối ưu hiệu suất (performance)\
+Các dự án lớn không phải là không thể áp dụng kiến trúc phân tầng, đặc biệt là các dự án có thiên hướng thay đổi về mặt technical.
+Phù hợp với các dự án mà yêu cầu nghiệp vụ của dự án đã tương đối đầy đủ và các thay đổi có thiên hướng tập trung về phía technical như thay đổi tầng database, hỗ trợ thêm các thiết bị mới mà nghiệp vụ không thay đổi.
+Ví dụ như dự án yêu cầu xây dựng hệ thống quản lý tập trung có thể access được trên mọi thiết bị, phase đầu tiên triển khai trên nền web, sau đó mở rộng ra các thiết bị di động khác. Có thể thấy logic xử lý là như nhau cho tầng `business`, anh em có thể giới hạn chỉ cần mở rộng tầng `presentation` là có thể đáp ứng yêu cầu của bài toán.
+
+# 6. Không nên
+
+**Operation concerns**\
+Layered architecture lộ rõ khuyết điểm khi ứng dụng cho các hệ thống yêu cầu khả năng mở rộng cao (scalable), khả năng chịu lỗi (fault tolerance).
+
 *Scale issue*\
-Nếu muốn scale một layer nào đó của kiến trúc, ta phải scale toàn bộ kiến trúc làm cho việc scale không hiệu quả và tốn kém, không tận dụng tối đa tài nguyên.\
+Layered architecture thường đi cùng kiến trúc monolithic, tất cả xử lý của các tầng nằm trong một khối lớn, lợi ích của kiến trúc này có thể kể đến như giảm thiểu overhead giao tiếp giữa các component, đơn giản hoá việc xử lý transaction, etc..
+nhưng ngược lại, nếu muốn scale một layer nào đó, ta phải scale toàn bộ khối monolithic này, mặc dù các layer khác hoàn toàn đáp ứng được capacity của hệ thống.
+Do đó scaling trở nên khó khăn, thường không hiệu quả và không tận dụng tối đa tài nguyên.\
 *Fault tolerance*\
-Hơn nữa, nếu xảy ra lỗi ở một layer nào đó, có thể dẫn đến sự shutdown của toàn bộ hệ thống.\
-*Performance*\
-Một request phải đi qua rất nhiều layer để có thể được xử lý, qua càng nhiều layer thì càng khó tối ưu về mặt performance.
+Fault tolerance đại diện cho khả năng chịu lỗi của hệ thống, ngăn chặn sự gián đoạn phát sinh từ một điểm thất bại duy nhất (Single point of failure).
+Nếu sử dụng kiến trúc nguyên khối phân tầng, tỉ lệ cao là hệ thống cũng sẽ down khi có sự cố xảy ra.
+Một trong những giải pháp cho phương án này là run service theo mô hình Active-standby, nhưng điều này lại raise lên vấn đề đã đề cập trước đấy là scaling issue.
 
 **Domain oriented**\
 Vì đây là một kiến trúc dạng technical, nên các dự án có nhiều thay đổi mang hơi hướng domain sẽ ảnh hưởng tới toàn bộ các layer.
 Ví dụ, yêu cầu thêm một trường expire date cho sản phẩm, thay đổi bắt đầu từ tầng database tất nhiên phải lưu trữ thông tin này, persistence, business và presentation layer đều phải thay đổi để cho phép operator chỉnh sửa expire date và hiển thị thông tin này cho người dùng cuối.\
 Càng nhiều layer, thì công việc càng trở nên phức tạp cho đến khi việc maintain trở nên cực kì khó khăn.
+
+# 7. Kết luận
+
+Tóm lại, Layered architecture là một lựa chọn lý tưởng cho những dự án cần sự đơn giản, dễ hiểu, và triển khai nhanh chóng.
+Tuy nhiên, kiến trúc này cũng có những hạn chế rõ ràng, đặc biệt khi đối mặt với những yêu cầu về khả năng mở rộng, chịu lỗi, hoặc thay đổi phức tạp trong domain.
+Với những hệ thống nhỏ và có thiên hướng technical, Layered architecture thực sự là một giải pháp nhanh gọn và hiệu quả.
+Nhưng nếu dự án đòi hỏi sự linh hoạt cao hoặc có khả năng phát sinh những thay đổi lớn về domain, thì cần cân nhắc kỹ lưỡng hơn về cách phân tầng và các mô hình kiến trúc khác phù hợp.\
+Dưới đây là hình ảnh đánh giá layered architecture trong cuốn **Software Architecture patterns**
+
+![characteristic]({{ site.baseurl }}/assets/img/layered_architecture/characteristic.png)
