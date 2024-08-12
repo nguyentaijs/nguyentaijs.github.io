@@ -42,7 +42,7 @@ Package trong `Java` sẽ có dạng như sau
 
 Bài viết này sẽ tập trung vào kiến trúc cơ bản nhất, đơn giản nhất, phổ biến nhất hiện nay, đời lập trình viên chưa ai chưa kinh qua kiến trúc này. **Layered architecture - kiến trúc quốc dân**
 
-# 1. Khái niệm
+# I. Khái niệm
 Layered architecture là kiểu kiến trúc được tổ chức theo chiều dọc bao gồm nhiều tầng xếp chồng lên nhau.
 Tùy vào độ phức tạp của dự án mà kiến trúc có số lượng tầng và chức năng của mỗi tầng khác nhau.
 Tuy vậy, các tầng phải tuân theo các tiêu chuẩn sau
@@ -58,7 +58,7 @@ Một thay đổi về mặt technical không làm ảnh hưởng đến các t�
 Tầng trên có thể sử dụng các chức năng mà các tầng dưới cung cấp thông qua các interface mà tầng dưới đã định nghĩa sẵn.
 Tầng dưới có trách nhiệm thực thi yêu cầu được gửi từ các tầng trên, và không có phụ thuộc ngược lại tầng trên.
 
-# 2. Kiến trúc cơ bản
+# II. Kiến trúc cơ bản
 Như đã nói ở trên không có quy định rõ rành về số lượng tầng và chức năng của mỗi tầng nhưng về cơ bản kiến trúc sẽ có 4 tầng
 
 ![layered_architecture.png]({{ site.baseurl }}/assets/img/layered_architecture/layered_architecture.png)
@@ -76,7 +76,7 @@ Persistence layer về mặt tổng quan không chỉ tương tác với databas
 **Database**\
 Là các dịch vụ lưu trữ như Mysql, MongoDb cung cấp các phương thức để thêm, xóa, sửa, truy vấn dữ liệu.
 
-# 3. Open and closed layer
+# III. Open and closed layer
 **Closed layer**\
 Bắt buộc một request từ tầng trên phải gọi trực tiếp xuống tầng kế tiếp nó. Giả sử một request để GET thông tin người dùng sẽ bắt buộc phải đi qua đủ 4 tầng để lấy được dữ liệu
 
@@ -105,7 +105,7 @@ Open layer mang lại sự linh hoạt cho hệ thống, tăng hiệu suất do 
 Nhược điểm của phương pháp này là làm giảm tính mô-dun, khó bảo trì và kiểm thử, cần nhiều công sức để tạo và cập nhật tài liệu giải thích.\
 Phù hợp với hệ thống yêu cầu hiệu suất cao và linh hoạt.
 
-# 4. Tính chất
+# IV. Tính chất
 Layered architecture là kiến trúc phổ biến nhất, được sử dụng rộng rãi vì sự đơn giản, dễ hiểu, dễ áp dụng.
 Lựa chọn kiến trúc này khi anh em muốn khởi động một dự án mà chưa biết kiến trúc nào sẽ phù hợp. Tuy vậy, cái gì đơn giản mà muốn sử dụng hiệu quả thì anh em thực sự hiểu và liên tục review, maintain kiến trúc.
 Một sai lầm thường mắc phải là rơi vào bẫy của **architecture sinkhole anti-pattern**
@@ -118,7 +118,7 @@ Nếu 80% số lượng request xảy ra tình trạng này thì cần phải c�
 - Chuyển layer từ closed sang open và ngược lại
 - Gộp 2 layer thành một layer mới có chức năng của cả hai
 
-# 5. Nên
+# V. Nên
 
 **Nhanh - gọn - lẹ**\
 Các hệ thống nhỏ, chi phí thấp, yêu cầu khắt khe về thời gian hoàn thành dự án.
@@ -132,7 +132,7 @@ Các dự án lớn không phải là không thể áp dụng kiến trúc phân
 Phù hợp với các dự án mà yêu cầu nghiệp vụ của dự án đã tương đối đầy đủ và các thay đổi có thiên hướng tập trung về phía technical như thay đổi tầng database, hỗ trợ thêm các thiết bị mới mà nghiệp vụ không thay đổi.
 Ví dụ như dự án yêu cầu xây dựng hệ thống quản lý tập trung có thể access được trên mọi thiết bị, phase đầu tiên triển khai trên nền web, sau đó mở rộng ra các thiết bị di động khác. Có thể thấy logic xử lý là như nhau cho tầng `business`, anh em có thể giới hạn chỉ cần mở rộng tầng `presentation` là có thể đáp ứng yêu cầu của bài toán.
 
-# 6. Không nên
+# VI. Không nên
 
 **Operation concerns**\
 Layered architecture lộ rõ khuyết điểm khi ứng dụng cho các hệ thống yêu cầu khả năng mở rộng cao (scalable), khả năng chịu lỗi (fault tolerance).
@@ -151,7 +151,7 @@ Vì đây là một kiến trúc dạng technical, nên các dự án có nhiề
 Ví dụ, yêu cầu thêm một trường expire date cho sản phẩm, thay đổi bắt đầu từ tầng database tất nhiên phải lưu trữ thông tin này, persistence, business và presentation layer đều phải thay đổi để cho phép operator chỉnh sửa expire date và hiển thị thông tin này cho người dùng cuối.\
 Càng nhiều layer, thì công việc càng trở nên phức tạp cho đến khi việc maintain trở nên cực kì khó khăn.
 
-# 7. Kết luận
+# VII. Kết luận
 
 Tóm lại, Layered architecture là một lựa chọn lý tưởng cho những dự án cần sự đơn giản, dễ hiểu, và triển khai nhanh chóng.
 Tuy nhiên, kiến trúc này cũng có những hạn chế rõ ràng, đặc biệt khi đối mặt với những yêu cầu về khả năng mở rộng, chịu lỗi, hoặc thay đổi phức tạp trong domain.
