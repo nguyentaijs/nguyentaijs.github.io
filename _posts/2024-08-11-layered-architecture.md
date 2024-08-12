@@ -6,6 +6,8 @@ tags: [discussion, system_design]
 date: 2024-08-11 22:22 +0700
 ---
 
+![cover_img]({{ site.baseurl }}/assets/img/layered_architecture/cover_img.png)
+
 # 0. Architecture partitioning
 Trước khi đi vào chi tiết, anh em cần nắm rõ hai cách thực hiện architecture partitioning thường được sử dụng trong thiết kế hệ thống\
 Architecture partitioning được hiểu là tiêu chí cơ bản để mô hình hóa kiến trúc hệ thống. Đơn giản ví dụ để hệ thống hóa cấp học trung học phổ thông ta có ít nhất 2 cách; đầu tiên có thể chia theo lớp (10, 11, 12), trong mỗi lớp có các môn Toán, Lí, Hóa, Văn, Sử, Địa; hoặc có thể chia theo môn học, Toán có Toán lớp 10, Toán lớp 11, Toán lớp 12, nhưng đều gọi chung là Toán THPT.\
