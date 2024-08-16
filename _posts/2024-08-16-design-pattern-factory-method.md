@@ -6,7 +6,7 @@ tags: [discussion, design_pattern, system_design]
 date: 2024-08-16 23:02 +0700
 ---
 
-![](../assets/img/design-pattern-factory-method/factory-method-cover-img.png)
+![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/factory-method-cover-img.png)
 
 **Factory method** và các design pattern nói chung, chắc hẳn anh em đã nghe đến cả trăm ngàn lần rồi.
 Nhưng liệu anh em đã bao giờ dừng lại và tự hỏi: “Các thư viện Java ứng dụng Factory Method như thế nào?” Đây sẽ là bài mở đầu trong một series thực chiến, nơi chúng ta sẽ cùng nhau khám phá cách mà các thư viện Java ứng dụng design pattern này, cũng như các biến thể thú vị của nó.
@@ -20,7 +20,7 @@ Nguyên văn của các bác **GoF** trong cuốn **Design patterns Elements of 
 > GoF
 
 **Structure tổng quát**\
-![](../factory-method/factory-method.png)
+![]({{ site.baseurl }}/factory-method/factory-method.png)
 
 Như vậy có thể hiểu nôm na là đẩy vai trò khởi tạo cho các subclass.
 Những tài liệu viết về định nghĩa và cấu trúc đã đủ nhiều rồi, anh em có thể tham khảo tài liệu của **GoF**, hoặc cuốn **Head first Design pattern** của **O'Reilly**.\
@@ -29,7 +29,7 @@ Không dài dòng nữa, anh em cùng tôi đi vào thực hành tìm hiểu cá
 # II. Cách các thư viện Java sử dụng Factory method
 ## java.net.URLStreamHandlerFactory#createURLStreamHandler()
 Ví dụ đầu tiên là `URLStreamHandlerFactory` với phương thức `createURLStreamHandler` trả về một `URLStreamHandler` theo tham số đầu vào.
-![](../assets/img/design-pattern-factory-method/url-stream-handler-factory.png)
+![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/url-stream-handler-factory.png)
 * `URLStreamHandlerFactory` tương ứng với `Creator`
 * `FactoryMethod` tương ứng với `createURLStreamHandler`
 * `URLStreamHandler` tương ứng với `Product`
@@ -45,7 +45,7 @@ Có thể thấy `URLStreamHandlerFactory` ốp toàn bộ cấu trúc đã đư
 Factory method còn có các biến thể khác khi `Creator` và `Product` được gộp vào làm một như trong ví dụ của `java.util.Calendar`.\
 Thay vì nhờ vả anh bạn `Creator` như ví dụ trên, `Calendar` tự tạo instance mới bằng cách sử dụng một **static method** - `getInstance()`
 
-![](../assets/img/design-pattern-factory-method/calendar.png)
+![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/calendar.png)
 
 `FactoryMethod()` chính là các hàm `getInstance(Locale)`, chấp nhận đầu vào là `locale`
 
@@ -59,13 +59,13 @@ Như vậy, khi cần `Client` gọi phương thức `Calendar.getInstance()` v�
 Ở ví dụ trên, `Creator` đã được thay thế bởi một **static method**, không dừng ở đấy, có một biến thể khác khi `Product` lúc này cũng không có các `ConcreteProduct` con, mà `factoryMethod()` chỉ đơn thuần trả về `Product` với các thuộc tính mang tính phân loại.\
 Trường hợp của `NumberFormat`, nó hoàn toàn không khởi tạo class con, nhưng lại khởi tạo các class con về mặt ý nghĩa, vẫn là number format nhưng được dùng cho mục đích format theo dạng số, dạng phần trăm hay format tiền tệ, etc..
 
-![](../assets/img/design-pattern-factory-method/number-format.png)
+![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/number-format.png)
 
 ## java.nio.charset.CharSet#forName()
 Nếu anh em chưa biết, ngoài vai trò ẩn đi logic khởi tạo, `Factory method` còn ứng dụng trong việc tối ưu tài nguyên sử dụng bằng cách trả về instance đã được khởi tạo thay vì khởi tạo instance mới.\
 `CharSet.forName()` là một ví dụ của phương pháp này. Bằng cách sử dụng `cache`, CharSet sẽ trả về instance đã được tạo trước đó nếu tham số đầu vào phù hợp, nếu không CharSet sẽ tạo mới và lưu vào cache để tối ưu tài nguyên cho các lần request sau.
 
-![](../assets/img/design-pattern-factory-method/charset.png)
+![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/charset.png)
 
 # III. Lời kết
 
