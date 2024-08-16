@@ -1,56 +1,17 @@
-# 0. Architecture partitioning
-Trước khi đi vào chi tiết, anh em cần nắm rõ hai cách thực hiện architecture partitioning thường được sử dụng trong thiết kế hệ thống\
-Architecture partitioning được hiểu là tiêu chí cơ bản để mô hình hóa kiến trúc hệ thống. Đơn giản ví dụ để hệ thống hóa cấp học trung học phổ thông ta có ít nhất 2 cách; đầu tiên có thể chia theo lớp (10, 11, 12), trong mỗi lớp có các môn Toán, Lí, Hóa, Văn, Sử, Địa; hoặc có thể chia theo môn học, Toán có Toán lớp 10, Toán lớp 11, Toán lớp 12, nhưng đều gọi chung là Toán THPT.\
-Trong kiến trúc phần mềm, anh em cũng có ít nhất hai góc nhìn cơ bản là **Technical partitioning** và **Domain partitioning**.
+# I. Khái niệm
+Một service được xem là một micro service khi nó chỉ làm và làm tốt đúng một vai trò duy nhất.\
+Micro services là tập hợp của nhiều micro service, số lượng service con không giới hạn, có thể lên đến hàng trăm hoặc hàng nghìn services nhỏ.\
+Nhờ có các dịch vụ như container và orchestration như Docker, Kubernetes mà việc theo dõi và quản lý các dịch vụ trong hệ thống cũng trở nên đơn giản và khả thi hơn.
 
-**Technical Partitioning**\
-Chia kiến trúc thành các **nhóm chức năng**, các component trong nhóm chỉ thực hiện một chức năng đã được định nghĩa cho nhóm đó.\
-Nhóm Persistence chỉ quản lý transaction và query xuống db,  Application(Business) xử lý logic nghiệp vụ, Presentation xử lý UI, etc. Rất nhiều kiến trúc follow cách làm này, có thể kể đến như layered architecture, pipeline architecture, microkenel architecture, event-driven architecture.
-Package trong `Java` sẽ có dạng như sau
-```
-  app.presentation.customer
-  app.business.customer
-  app.persistence.customer
-
-  app.presentation.payment
-  app.business.payment
-  app.persistence.payment
-```
-
-**Domain partitioning**\
-Chia kiến trúc thành các **nhóm lĩnh vực** cụ thể.\
-Nhóm order có thể bao gồm việc xử lý logic và query database nhưng chỉ gói gọn các xử lý liên quan đến order, tương tự như vậy với inventory management, statistic, etc.
-Được ứng dụng trong kiến trúc Domain driven design (DDD)
-Package trong `Java` sẽ có dạng như sau
- ```
-  app.customer.presentation
-  app.customer.business
-  app.customer.persistence
-
-  app.payment.presentation
-  app.payment.business
-  app.payment.persistence
-```
-
-Bài viết này sẽ tập trung vào kiến trúc cơ bản nhất, đơn giản nhất, phổ biến nhất hiện nay, đời lập trình viên chưa ai chưa kinh qua kiến trúc này. **Layered architecture - kiến trúc quốc dân**
-
-# 1. Khái niệm
-Layered architecture là kiểu kiến trúc được tổ chức theo chiều dọc bao gồm nhiều tầng xếp chồng lên nhau.
-Tùy vào độ phức tạp của dự án mà kiến trúc có số lượng tầng và chức năng của mỗi tầng khác nhau.
-Tuy vậy, các tầng phải tuân theo các tiêu chuẩn sau
-
-**Technical partitioning**\
-Kiến trúc này sử dụng technical partitioning để phân chia thành các nhóm chức năng.
-
-**Separation of concern**\
-Mỗi tầng có một vai trò riêng biệt, các tầng độc lập với nhau, đảm bảo logic không bị chồng chéo lên nhau. Các component con của tầng `presentation` chỉ có chức năng xử lý giao diện và tương tác với người dùng cuối, không được thực hiện query dữ liệu từ database, vai trò này thuộc về tầng `persistence`.
-Một thay đổi về mặt technical không làm ảnh hưởng đến các tầng khác. Ví dụ hệ thống web application được mở rộng trên mobile application, lúc này chỉ cần mở rộng riêng tầng `Presentation` vốn chuyên xử lý giao diện và tương tác người dùng; các xử lý liên quan đến nghiệp vụ hoặc database của các tầng khác không bị ảnh hưởng.
-
-**Giao tiếp giữa các tầng**\
-Tầng trên có thể sử dụng các chức năng mà các tầng dưới cung cấp thông qua các interface mà tầng dưới đã định nghĩa sẵn.
-Tầng dưới có trách nhiệm thực thi yêu cầu được gửi từ các tầng trên, và không có phụ thuộc ngược lại tầng trên.
+Thiết kế kiến trúc này cần cân nhắc kỹ lưỡng để đảm bảo tính độc lập của từng service.
+Trường hợp lý tưởng nhất, mỗi service nằm gọn trong **Bounded context** của mình, có nghĩa là service có một vùng dữ liệu riêng chỉ được access bởi service đó.
+Các service khác nếu muốn lấy dữ liệu liên quan phải gọi thông qua một contract tới service này (VD: API calls), chứ không được access trực tiếp.
+Nhờ có tính chất này mà việc phản ứng với thay đổi trở nên đơn giản hơn khi nó chỉ ảnh hưởng đến một hoặc một vài services liên quan.
+Mặc dù vậy, trên thực tế việc set bounded context cho từng service đôi khi không thể thực hiện, một trọng những lý do là vì vấn đề performance, 2 services có thể access chung một database để giảm thiểu các giao tiếp không cần thiết.
+Nhưng cũng chỉ nên giới hạn tối đa 6 services share chung môt context, nếu không có sự kiểm soát trong việc này có thể khiến cho việc maintain hệ thống ngày càng trở nên phức tạp.
 
 # 2. Kiến trúc cơ bản
+TODO: API Gateway
 Như đã nói ở trên không có quy định rõ rành về số lượng tầng và chức năng của mỗi tầng nhưng về cơ bản kiến trúc sẽ có 4 tầng
 
 **Presentation**\
