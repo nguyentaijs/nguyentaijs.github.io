@@ -39,6 +39,10 @@ Ví dụ đầu tiên là `URLStreamHandlerFactory` với phương thức `creat
   * `sun.net.www.protocol.jar.Handler`
   * `sun.net.www.protocol.jrt.Handler`
 
+Structure được vẽ lại tương ứng như sau
+
+![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/url-stream-handler-factory-structure.png)
+
 Có thể thấy `URLStreamHandlerFactory` ốp toàn bộ cấu trúc đã được định nghĩa của **GoF**, `Client` chỉ cần gọi phương thức trên và truyền vào protocol mong muốn.
 
 ## java.util.Calendar#getInstance()
@@ -74,6 +78,11 @@ Việc hiểu rõ và nắm vững những pattern này không chỉ giúp chún
 Hãy tiếp tục theo dõi series để cùng khám phá thêm nhiều điều thú vị về các design pattern trong các thư viện Java khác nhé
 
 # IV. Tài liệu tham khảo
-1. Refactoring Guru: https://refactoring.guru/design-patterns
+1. Refactoring Guru: [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns)
 2. Head first design pattern - O'Reilly
 3. Design patterns Elements of Reusable Object-Oriented Software - GoF
+
+-----
+
+Nếu anh em cảm thấy bài viết hữu ích đừng ngần ngại click upvote cho bài viết, hoặc phát hiện ý nào chưa hợp lý hoặc cần giải thích thêm hãy comment cho tôi biết để cùng trao đổi nhé.
+Anh em có thể tham khảo các bài viết khác của tôi tại [Blog cái nhân](https://nguyentaijs.github.io/) hoặc kết nối với tôi qua [Linkedin](https://www.linkedin.com/in/nguyentaijs)
