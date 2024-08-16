@@ -1,5 +1,5 @@
 # I. Khái niệm và kiến trúc
-Nguyên văn của các bác GoF
+Nguyên văn của các bác **GoF** trong cuốn **Design patterns Elements of Reusable Object-Oriented Software**
 > Define an interface for creating an object, but let subclasses decide which class to instantiate.\
 > Factory Method lets a class defer instantiation to subclasses.
 >
