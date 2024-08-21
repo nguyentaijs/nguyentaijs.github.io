@@ -6,7 +6,7 @@ tags: [discussion, design_pattern, system_design]
 date: 2024-08-21 23:09 +0700
 ---
 
-![Abstract_factory_cover_image.png](../assets/img/design-pattern-abstract-factory/Abstract_factory_cover_image.png)
+![Abstract_factory_cover_image.png]({{ site.baseurl }}/assets/img/design-pattern-abstract-factory/Abstract_factory_cover_image.png)
 
 Ở bài viết trước, chúng ta đã cùng nhau tìm hiểu về [Factory Method](https://viblo.asia/p/design-pattern-vao-thu-vien-tim-factory-method-y3RL1PyPJao) và cách nó giúp đơn giản hóa việc khởi tạo các đối tượng trong các hệ thống phức tạp.
 Tiếp nối series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5), bài viết này sẽ đưa bạn đến với một design pattern khác cũng không kém phần quan trọng và phổ biến trong lập trình hướng đối tượng: **Abstract Factory**.
@@ -24,7 +24,7 @@ Trong bài viết này, chúng ta sẽ khám phá cách implement pattern này b
 
 **Structure tổng quát**
 
-![](../assets/img/design-pattern-abstract-factory/abstract_factory_structure.png)
+![]({{ site.baseurl }}/assets/img/design-pattern-abstract-factory/abstract_factory_structure.png)
 
 # II. Thực hành implement abstract factory
 
@@ -53,7 +53,7 @@ Cuối cùng, chúng ta sẽ sử dụng **Abstract Factory** để khởi tạo
 Dễ thấy cách làm này giúp đảm bảo tính linh hoạt và dễ dàng mở rộng khi có nhu cầu hỗ trợ thêm các hệ điều hành hoặc thiết bị khác trong tương lai, chẳng hạn như Android
 
 ## 3. Mapping
-![Abstract factory mapping.png](../assets/img/design-pattern-abstract-factory/Abstract_factory_mapping.png)
+![Abstract factory mapping.png]({{ site.baseurl }}/assets/img/design-pattern-abstract-factory/Abstract_factory_mapping.png)
 
 ## 4. Implement sử dụng Java
 **Dialog | Product**
