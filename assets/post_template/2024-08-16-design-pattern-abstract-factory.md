@@ -19,17 +19,38 @@ specifying their concrete classes.
 >
 > **GoF**
 
-Intense của pattern này là tạo ra một interface cung cấp chức năng tạo một vài họ (families) của các đối tượng có liên quan đến nhau mà không cần chỉ đích danh họ đó là gì.
+Mục tiêu hướng tới của pattern này là tạo ra một interface cung cấp chức năng tạo một vài họ (families) của các đối tượng có liên quan đến nhau mà không cần chỉ đích danh họ đó là gì.
 
 **Structure tổng quát**\
 ![img.png](img.png)
 
-# II. Ví dụ
-Cấu tạo của một chiếc bàn phím cơ bản bao gồm: case, bảng mạch, switch, keycap\
-Nhưng bàn phím được chia theo nhiều loại khác nhau phục vụ các nhóm đối tượng khách hàng khác nhau.\
-Bàn phím văn phòng cơ bản nhất là bàn phím
+# II. Tự implement abstract factory
 
-# III. Implementation trong Java
+## Yêu cầu bài toán
+
+**Phát triển phần mềm mô phỏng giao diện người dùng (GUI - Graphic User Interface) cho cả iOS và Windows**
+
+Trong phiên bản đầu tiên, giao diện được thiết kế đơn giản với hai thành phần cơ bản: dialog và button.
+
+Khi ứng dụng được khởi tạo, người dùng có thể `render` một dialog và cho phép nó `show` trên màn hình.\
+Đối với button, người dùng có thể `render` và `click` button đó.\
+Tương lai yêu cầu có thể mở rộng ra xây dựng GUI hỗ trợ các OS và thiết bị khác như android.
+
+## Phân tích yêu cầu
+Families (họ): iOS & windows, đây là tín hiệu đầu tiên và rõ ràng nhất để cân nhắc sử dụng abstract factory.\
+Application: nhận các tương tác của người dùng và cũng là container chứa các dialog và button\
+Dialog với 2 phương thức: `render` để khởi tạo & `show` để hiển thị lên application\
+Button với 2 phương thức: `render` để khởi tạo & `click` để nhận action click của người dùng\
+Cuối cùng, sử dụng abstract factory để khởi tạo các đối tượng của Application tuỷ thuộc vào OS của hệ thống
+
+## Mapping
+
+
+# II. Implement sử dụng Java
+
+
+
+# III. Implementation sử dụng Spring
 # IV. Implementation trong Spring
 ## java.net.URLStreamHandlerFactory#createURLStreamHandler()
 Ví dụ đầu tiên là `URLStreamHandlerFactory` với phương thức `createURLStreamHandler` trả về một `URLStreamHandler` theo tham số đầu vào.
