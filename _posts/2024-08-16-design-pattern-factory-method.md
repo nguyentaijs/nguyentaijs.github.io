@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Vào thư viện tìm Factory method
+title: Design pattern - Vào thư viện tìm Factory method
 categories: [discussion, design_pattern, system_design]
 tags: [discussion, design_pattern, system_design]
 date: 2024-08-16 23:02 +0700
