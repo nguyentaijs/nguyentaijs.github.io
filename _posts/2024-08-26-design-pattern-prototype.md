@@ -6,7 +6,7 @@ tags: [discussion, design_pattern, system_design]
 date: 2024-08-26 23:45 +0700
 ---
 
-![prototype-cover-assets/img.png]({{ site.baseurl }}/assets/img/design-pattern-prototype/prototype-cover-assets/img.png)
+![prototype-cover-assets/img.png]({{ site.baseurl }}/assets/img/design-pattern-prototype/prototype-cover-img.png)
 
 Chào mừng anh em trở lại với series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối tượng.
 Trong bài viết lần này, chúng ta sẽ tiếp tục khám phá một trong những pattern cơ bản khác – **Prototype Pattern**.
