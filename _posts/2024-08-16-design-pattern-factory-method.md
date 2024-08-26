@@ -19,8 +19,15 @@ Nguyên văn của các bác **GoF** trong cuốn **Design patterns Elements of 
 >
 > GoF
 
+**Nhóm**: Creational pattern
+
 **Structure tổng quát**\
 ![]({{ site.baseurl }}/assets/img/design-pattern-factory-method/factory-method.png)
+
+**Creator**: Khai báo phương thức `factoryMethod()`\
+**Concrete Creator**: override `factoryMethod()` trả về instance của một `concreteProduct`\
+**Product**: định nghĩa interface chung được sử dụng bởi các `concreteCreator`\
+**Concrete Product**: implement `Product` interface
 
 Như vậy có thể hiểu nôm na là đẩy vai trò khởi tạo cho các subclass.
 Những tài liệu viết về định nghĩa và cấu trúc đã đủ nhiều rồi, anh em có thể tham khảo tài liệu của **GoF**, hoặc cuốn **Head first Design pattern** của **O'Reilly**.\

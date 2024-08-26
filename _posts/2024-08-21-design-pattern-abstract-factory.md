@@ -18,6 +18,8 @@ specifying their concrete classes.
 >
 > **GoF**
 
+**Nhóm**: Creational pattern
+
 Mục tiêu hướng tới của pattern này là tạo ra một interface cung cấp chức năng tạo một vài **họ (families**) của các đối tượng có liên quan đến nhau.
 được sử dụng để tạo ra các họ đối tượng có liên quan với nhau mà không cần chỉ định lớp cụ thể.
 Trong bài viết này, chúng ta sẽ khám phá cách implement pattern này bằng Java thuần và cả Spring, từ đó giúp bạn nắm rõ sự khác biệt giữa hai cách tiếp cận và lợi ích của từng phương pháp.
@@ -25,6 +27,11 @@ Trong bài viết này, chúng ta sẽ khám phá cách implement pattern này b
 **Structure tổng quát**
 
 ![]({{ site.baseurl }}/assets/img/design-pattern-abstract-factory/abstract_factory_structure.png)
+
+**Abstract factory**: cung cấp interface chung cho các `ConcreteFactory`\
+**Concrete factory**: implement các method của `ConcreateFactory` trả về các `ConcreteProduct` thuộc họ của mình\
+**AbstractProduct**: cung cấp interface chung cho các `ConcreteProduct`\
+**ConcreteProduct**: implement `AbstractProduct` interface, được tạo ra bởi các `ConcreateFactory`
 
 # II. Thực hành implement abstract factory
 
