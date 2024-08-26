@@ -6,7 +6,7 @@ tags: [discussion, design_pattern, system_design]
 date: 2024-08-26 23:45 +0700
 ---
 
-![prototype-cover-img.png]({{ site.baseurl }}/img/design-pattern-prototype/prototype-cover-img.png)
+![prototype-cover-assets/img.png]({{ site.baseurl }}/assets/img/design-pattern-prototype/prototype-cover-assets/img.png)
 
 Chào mừng anh em trở lại với series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối tượng.
 Trong bài viết lần này, chúng ta sẽ tiếp tục khám phá một trong những pattern cơ bản khác – **Prototype Pattern**.
@@ -24,7 +24,7 @@ Mục tiêu hướng tới của pattern này là tạo các đối tượng m�
 
 **Structure tổng quát**
 
-![structure]({{ site.baseurl }}/img/design-pattern-prototype/prototype-structure.png)
+![structure]({{ site.baseurl }}/assets/img/design-pattern-prototype/prototype-structure.png)
 
 **Prototype**: định nghĩa interface để clone\
 **ConcretePrototype**: implement phương thức `clone()` để clone chính nó\
@@ -60,7 +60,7 @@ Các thuộc tính có kiểu tham chiếu được tạo ra một bản sao ho�
 Phương pháp này tách biệt clone instance và instance gốc, tránh phát sinh side effect trong quá trình sử dụng. Tuy nhiên phương pháp này tiêu tốn tài nguyên hơn nhiều so với shallow copy.
 
 ## 3. So sánh
-![compare]({{ site.baseurl }}/img/design-pattern-prototype/compare-shallow-and-deep.png)
+![compare]({{ site.baseurl }}/assets/img/design-pattern-prototype/compare-shallow-and-deep.png)
 
 # III. Thực hành implement trong Java
 ## 1. Shallow copy
