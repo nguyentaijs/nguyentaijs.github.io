@@ -21,7 +21,8 @@ Trích từ cuốn **Design patterns Elements of Reusable Object-Oriented Softwa
 >
 >
 TODO giải thích bằng tiếng Việt
-Mục tiêu của pattern này là
+Pattern này có 2 mục tiêu chính
+1. Một class chỉ c
 
 
 **Nhóm**: Creational pattern
