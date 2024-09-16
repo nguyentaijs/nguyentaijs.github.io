@@ -18,28 +18,29 @@ Trích từ cuốn **Design patterns Elements of Reusable Object-Oriented Softwa
 >
 > **GoF**
 >
->
->
-TODO giải thích bằng tiếng Việt
-Pattern này có 2 mục tiêu chính
-1. Một class chỉ c
-
 
 **Nhóm**: Creational pattern
 
-**Structure tổng quát**
+Pattern này có 2 mục tiêu chính
+1. Đảm bảo 1 class chỉ có 1 instance duy nhất: ngăn chặn việc khởi tạo nhiều instance của một class
+2. Cung cấp một điểm truy cập toàn cục (global access point): sử dụng một static method cho phép các component khác tùy ý access instance duy nhất này.
 
+**Structure tổng quát**
 TODO
 ![structure](Structure from doc)
 
-TODO giải thích các thành phần
-**Prototype**: định nghĩa interface để clone\
-**ConcretePrototype**: implement phương thức `clone()` để clone chính nó\
-**Client**: tạo instance mới bằng cách gọi phương thức `clone()`
+Structure của Singleton rất đơn giản, chỉ có một class có tên là singleton
+**Singleton**: class chứa ít nhất 3 thành phần chính
+1. Private static instance `private static instance`
+2. Private constructor `private Singleton()`
+3. Public static method `getInstance()` cung cấp access point đến instance cho các component khác
 
-# II. TODO nội dung
+## 2. Ứng dụng
+Sử dụng khi cần quản lý tài nguyên hệ thống một cách nhất quán. Một ứng dụng khác là khởi tạo những instance tiêu tốn nhiều tài nguyên hệ thống mặc dù instance này vẫn có khả năng được tái sử dụng.\
+Các ví dụ thực tế có thể kể đến bao gồm database connection, loggers, hoặc các config hệ thống phức tạp nhưng lại yêu cầu sự nhất quán trên toàn bộ hệ thống.
 
-# III. Thực hành implement trong Java
+# II. Thực hành implement trong Java
+
 
 TODO
 **Shape | Prototype**\
