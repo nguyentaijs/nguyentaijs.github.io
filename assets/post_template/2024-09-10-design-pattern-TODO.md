@@ -7,7 +7,7 @@ date: 2024-09-10 23:45 +0700
 ---
 
 TODO
-![cover](Cover image)
+COVER IMG
 
 Chào mừng anh em trở lại với series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối tượng.
 TODO intro
@@ -27,7 +27,7 @@ TODO giải thích bằng tiếng Việt
 **Structure tổng quát**
 
 TODO
-![structure](Structure from doc)
+STRUCTURE IMG
 
 TODO giải thích các thành phần
 **Prototype**: định nghĩa interface để clone\
