@@ -36,18 +36,19 @@ Structure của Singleton rất đơn giản, chỉ có một class có tên là
 3. Public static method `getInstance()` cung cấp access point đến instance cho các component khác
 
 ## 2. Ứng dụng
-Sử dụng khi cần quản lý tài nguyên hệ thống một cách nhất quán. Một ứng dụng khác là khởi tạo những instance tiêu tốn nhiều tài nguyên hệ thống mặc dù instance này vẫn có khả năng được tái sử dụng.\
-Các ví dụ thực tế có thể kể đến bao gồm database connection, loggers, hoặc các config hệ thống phức tạp nhưng lại yêu cầu sự nhất quán trên toàn bộ hệ thống.
+Sử dụng khi cần quản lý tài nguyên hệ thống một cách nhất quán.
+Các ví dụ thực tế có thể kể đến bao gồm database connection, loggers hoặc các config hệ thống phức tạp nhưng lại yêu cầu sự nhất quán trên toàn bộ hệ thống.
 
 # II. Thực hành implement trong Java
 
+## 1. Naive implementation
+Đúng như định nghĩa trên
+1. private static instance
+2. private constructor
+3. public static method `getInstance()`
 
-TODO
-**Shape | Prototype**\
-Gỉai thích
-
+**Singleton**\
 ```java
-CODE java
 ```
 
 **Shape | Prototype**\
