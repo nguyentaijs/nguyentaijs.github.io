@@ -6,7 +6,7 @@ tags: [discussion, design_pattern, system_design]
 date: 2024-09-10 23:45 +0700
 ---
 
-![cover.png]({{ site.baseurl }}/img/design-pattern-singleton/cover.png)
+![cover.png]({{ site.baseurl }}/assets/img/design-pattern-singleton/cover.png)
 
 Chào mừng anh em trở lại với series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối tượng.
 **Singleton** là một trong những design pattern cơ bản và quan trọng nhất trong nhóm **Creational Pattern**.\
@@ -29,7 +29,7 @@ Pattern này có 2 mục tiêu chính
 2. Cung cấp một điểm truy cập toàn cục (global access point): sử dụng một static method cho phép các component khác tùy ý access instance duy nhất này.
 
 **Structure tổng quát**
-![structure]({{ site.baseurl }}/img/design-pattern-singleton/structure.png)
+![structure]({{ site.baseurl }}/assets/img/design-pattern-singleton/structure.png)
 
 Structure của Singleton rất đơn giản, chỉ có một class\
 **Singleton**: class chứa ít nhất 3 thành phần chính
