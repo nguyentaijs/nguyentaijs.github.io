@@ -29,6 +29,7 @@ Pattern này có 2 mục tiêu chính
 2. Cung cấp một điểm truy cập toàn cục (global access point): sử dụng một static method cho phép các component khác tùy ý access instance duy nhất này.
 
 **Structure tổng quát**
+
 ![structure]({{ site.baseurl }}/assets/img/design-pattern-singleton/structure.png)
 
 Structure của Singleton rất đơn giản, chỉ có một class\
