@@ -54,7 +54,7 @@ public Offer(OfferComponents offerComponents, String fileType, List<MultipartFil
 }
 ```
 
-Đoạn code trên khó maintain, khó đọc, vừa có khả năng tạo ra bug vì sai sót trong lúc set giá trị của 1 trong 6 anh `boolean params` xếp liền nhau.
+Đoạn code trên khó maintain, khó đọc, mà lại có nguy cơ cao tạo ra bug vì sai sót trong lúc set giá trị của 1 trong 6 anh `boolean params` xếp liền nhau.
 
 ### 2.2. Telescoping constructor
 Đây là một phương pháp xử lý các tham số không bắt buộc. Theo đó, một class có nhiều constructor với số lượng tham số khác nhau.
@@ -115,16 +115,50 @@ public class Car {
 ```
 
 # III. Thực hành implement trong Java
+Bàn phím cơ bao gồm các thành phần cơ bản sau
+trên cùng là keycap dùng để đánh dấu ký tự, thường được thiết kế hơi hõm xuống để tạo cảm giác nhấn tốt hơn
+switch được gài lên trên plate và có 2 chân gắn trực tiếp vào pcb, mỗi khi người dùng nhấn một phím bất kỳ, tín hiệu sẽ thông qua switch truyền xuống pcb. 
+plate dùng để gài các switch, chịu trách nhiệm giữ chặt switch trên bảng mạch, tránh các tình trạng flex, ọp ẹp.
+pcb được xe như bộ não của bàn phím, nhận tín hiệu thông qua switch và biến đổi thành các tổ hợp lệnh gửi đến thiết bị.
+case là phần vỏ bên ngoài chứa toàn bộ các linh kiện kể trên
+cable là phần dây kết nối giữa bàn phím và máy tính, chịu trách nhiệm làm cầu nối dữ liệu giữa PCB và thiết bị
+
+Các thành phần được xếp vào dạng optional bao gồm
+Foam tiêu âm
+Pin, wireless module, bluetooth module cho bàn phím rời
+Núm xoay để tăng trải nghiệm :))
+Màn hình hiển thị trạng thái của bàn phím và trách nhiệm chính là làm màu
+
+Như vậy, chúng ta vừa đi qua danh sách các thành phần cơ bản bắt buộc cần có và một vài option để tăng trải nghiệm.
+Bài toán của chúng ta là, xây dựng một chương trình để build 2 loại bàn phím sau
+1. bàn phím cơ basic: keycap, switch, plate, pcb, case, cable
+2. Bàn phím cơ custom:  bàn phím cơ basic + foam tiêu âm, núm, màn hình phụ.
+3. bàn phím cơ không dây: ngoài các thành phần của bàn phím cơ basic, còn có thêm pin, wireless module, bluetooth module
 
 ```java
-public Circle(Circle target) {
-    super(target);
-    if (Objects.nonNull(target)) {
-        this.radius = target.radius;
-        System.out.println("Deep copy");
-        this.color = target.color.clone();
-    }
+public class Director() {
+    buildBasicKeyboard();
+    buildCustomKeyboard();
+    buildwirelessKeyboard();
+
 }
+```
+
+```java
+public interface Builder() {
+   setKeycap(Keycap keycap);
+  setSwitch(Switch switch);
+   setPlate(Plate plate);
+  setCase(Case case);
+  setCable(Cable cable);
+   setFoam();
+  setKnob();
+  setMiniMonitor();
+}
+```
+
+```java
+  public class   
 ```
 
 Trên thực tế, việc implement deep copy phức tạp hơn nhiều vì một class có thể có nhiều thuộc tính tham chiếu, mỗi thuộc tính tham chiếu lại có thể có nhiều thuộc tính con khác.
