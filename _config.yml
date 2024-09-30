@@ -21,10 +21,10 @@ timezone: Asia/Ho_Chi_Minh
 
 title: Nguyen Tai                          # the main title
 
-tagline: A passionate developer   # it will display as the sub-title
+tagline: Technical Lead | AWS | SA learning  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  This is where I share my fun stuffs to the world.
+  Let's connect. This is where I share my fun stuffs to the world.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://nguyentaijs.github.io'
@@ -46,7 +46,7 @@ social:
     - https://github.com/nguyentaijs       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/nguyentaijs
 
 google_site_verification:               # fill in to your verification string
 
