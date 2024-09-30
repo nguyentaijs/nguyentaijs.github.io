@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Design pattern - Công nghệ nhân bản nhờ prototype
+title: Design pattern - Prototype
 categories: [discussion, design_pattern, system_design]
 tags: [discussion, design_pattern, system_design]
 date: 2024-08-26 23:45 +0700
