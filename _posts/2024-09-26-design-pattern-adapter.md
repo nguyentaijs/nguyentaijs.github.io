@@ -344,7 +344,7 @@ public class ClassSocketAdapterImpl extends Socket implements SocketAdapter {
 ```
 Full code anh em có thể tham khảo ở đây: [design-pattern-made-easy/adapter](https://github.com/nguyentaijs/design-pattern-made-easy/tree/main/adapter/src/main/java/io/github/nguyentaijs)
 
-# III. Lời kết
+# IV. Lời kết
 Adapter Pattern là một trong những design pattern cơ bản trong lập trình hướng đối tượng, giúp giải quyết vấn đề tương thích giữa các interface mà không làm thay đổi cấu trúc tổng thể của hệ thống.
 Như đã thấy trong ví dụ về việc chuyển đổi dòng điện, Adapter giúp đảm bảo tính linh hoạt và mở rộng trong việc sử dụng lại các thành phần có sẵn, tích hợp với các hệ thống khác, hoặc làm việc với các nền tảng có yêu cầu khác nhau mà không cần phải thay đổi trực tiếp code hiện tại.
 
@@ -354,7 +354,7 @@ Adapter Pattern không chỉ ứng dụng trong lập trình mà còn mang lại
 Hãy nhớ rằng, đôi khi không phải lúc nào cũng cần phải phá bỏ và xây dựng lại từ đầu, đôi khi chỉ cần một adapter nhỏ là đã có thể giải quyết vấn đề hiệu quả!
 Hẹn anh em ở các bài viết tiếp theo~
 
-# IV. Tài liệu tham khảo
+# V. Tài liệu tham khảo
 1. [Refactoring.guru](https://refactoring.guru/design-patterns)
 2. Head first design pattern - O'Reilly
 3. Design patterns Elements of Reusable Object-Oriented Software - GoF
