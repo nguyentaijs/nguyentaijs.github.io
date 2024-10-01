@@ -8,23 +8,29 @@ date: 2024-10-04 22:00 +0700
 
 TODO
 COVER IMG
+![cover.png](../img/design-pattern-facade/cover.png)
 
 Chào mừng anh em trở lại với
 series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối
 tượng.
-Trong lập trình hướng đối tượng, khi thiết kế các hệ thống phức tạp, một trong những thách thức lớn nhất là quản lý sự
-phức tạp đó và giữ cho hệ thống dễ bảo trì, mở rộng. Facade Pattern (Mẫu Facade) là một trong những giải pháp thiết kế (
-Design Patterns) giúp giải quyết vấn đề này. Nó giúp đơn giản hóa sự tương tác với hệ thống phức tạp bằng cách cung cấp
-một giao diện đơn giản, từ đó làm cho mã dễ đọc và bảo trì hơn.
+Khi thiết kế các hệ thống phức tạp, một trong những thách thức lớn nhất là độ phức tạp và giữ cho hệ thống dễ bảo trì, mở rộng.
+**Facade Pattern** là một trong những giải pháp giúp giải quyết vấn đề trên.
+Nó giúp đơn giản hóa tương tác với hệ thống phức tạp bằng cách cung cấp một interface đơn giản,
+từ đó làm cho code dễ đọc và bảo trì hơn. Tuy nhiên, việc lạm dụng **Facade pattern** cũng nảy sinh các vấn đề mới.\
+Vậy sử dụng Facade sao cho đúng và đủ, anh em hãy cùng tôi tìm hiểu qua bài viết này
 
 # I. Khái niệm và kiến trúc
-
 ## 1. Định nghĩa
+**Facade pattern** cung cấp một interface đơn giản và dễ sử dụng cho một hệ thống con phức tạp hoặc một nhóm các class có mối quan hệ với nhau.
 
-Facade Pattern là một mẫu thiết kế thuộc nhóm Structural Patterns (các mẫu thiết kế cấu trúc). Nó cung cấp một giao
-diện đơn giản và dễ sử dụng cho một hệ thống con phức tạp hoặc một nhóm các lớp có liên quan. Facade không xóa bỏ sự
-phức tạp bên trong hệ thống, mà chỉ che giấu nó, làm cho người sử dụng chỉ cần tương tác với một lớp giao diện duy
-nhất.
+Ví dụ quá trình thanh toán QR hiện nay cực kỳ đơn giản, nhưng đấy chỉ được xem là Facade của hệ thống thanh toán.
+Phía sau nó là hàng ngàn xử lý phức tạp tương ứng với mỗi giao dịch.
+Do đó, có thể nói Facade không thực sự loại bỏ sự phức tạp bên trong hệ thống, mà chỉ che giấu nó dưới một interface duy nhất.
+
+> **Facade** dịch sang tiếng Việt có nghĩa là "mặt tiền"\
+> Khi nhắc đến Facade, anh em hãy nhớ đến cụm từ **Simplified Interface**
+
+**Nhóm: Structural patterns**
 
 ## 2. Vấn đề mà Facade giải quyết
 
