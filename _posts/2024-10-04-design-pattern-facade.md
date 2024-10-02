@@ -1,16 +1,15 @@
 ---
 layout: post
-title: Design pattern - Facade
+title: Design pattern - Facade Simplified Interface
 categories: [ discussion, design_pattern, system_design ]
 tags: [ discussion, design_pattern, system_design ]
 date: 2024-10-04 22:00 +0700
 ---
 
-![cover](../img/design-pattern-facade/cover.png)
+![cover]({{ site.baseurl }}/assets/img/design-pattern-facade/cover.png)
 
 Chào mừng anh em trở lại với
-series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối
-tượng.
+series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối tượng.
 Khi thiết kế các hệ thống phức tạp, một trong những thách thức lớn nhất là độ phức tạp và giữ cho hệ thống dễ bảo trì, mở rộng.
 **Facade Pattern** là một trong những giải pháp giúp giải quyết vấn đề trên.
 Nó giúp đơn giản hóa tương tác với hệ thống phức tạp bằng cách cung cấp một interface đơn giản,
@@ -34,7 +33,7 @@ Do đó, có thể nói Facade không thực sự loại bỏ sự phức tạp 
 Trong các hệ thống lớn, một hệ thống con hoặc một tập hợp các class thường phức tạp với rất nhiều thành phần và
 quy tắc nghiệp vụ. Điều này dẫn đến việc anh em phải tương tác với rất nhiều class, theo thời gian code trở nên khó đọc, khó bảo trì, khó nâng cấp và mở rộng.
 
-## 3. Intent (Mục đích)
+## 3. Intent
 Trích từ cuốn **Design patterns Elements of Reusable Object-Oriented Software**
 > Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level
 > interface that makes the subsystem easier to use.
@@ -48,9 +47,9 @@ Các lợi ích khi sử dụng Facade bao gồm
 - Giảm thiểu sự phụ thuộc client và các thành phần phía sau Facade.
 - Dễ bảo trì, dễ mở rộng hơn.
 
-## 4. Structure (Cấu trúc)
+## 4. Structure
 
-![Structure](../img/design-pattern-facade/structure.png)
+![Structure]({{ site.baseurl }}/assets/img/design-pattern-facade/structure.png)
 
 **Facade**\
 Cung cấp interface đơn giản cho hệ thống con.
@@ -70,8 +69,8 @@ tâm đến chi tiết bên trong.
 - Giảm sự phụ thuộc giữa hệ thống con và các class khác trong ứng dụng.
 - Trong mô hình 3 layers, tầng **Service** có thể được xem như một Facade.\
 Layer này cung cấp giao diện đơn giản cho tầng **Presentation** tương tác, đồng thời xử lý logic nghiệp vụ phức tạp bên dưới mà **Presentation** không cần phải nắm rõ.
-## 6. Pitfall
 
+## 6. Pitfall
 **Lạm dụng Facade**\
 Nếu không bố trí hợp lý, Facade sẽ trở thành trại tị nạn của các class, class nào mới tạo cũng được ném vào facade khiến cho facade trở nên cồng kềnh khó bảo trì.\
 Việc sử dụng quá nhiều Facade cũng có thể làm mất đi sự linh hoạt khi cần access trực tiếp vào hệ thống con.\
@@ -81,7 +80,7 @@ Nên phân bổ các class một cách hợp lý vào các facade, những class
 Nếu không thiết kế cẩn thận, Facade có thể làm giảm khả năng mở rộng của hệ thống.
 Mỗi khi cần thêm chức năng mới, anh em có thể phải thay đổi giao diện của Facade.
 
-# II. Các ứng dụng trong các thư viện lớn của Java
+# II. Ứng dụng trong các thư viện của Java
 Trong Java, Facade Pattern được ứng dụng rộng rãi trong nhiều thư viện và framework. Một số ví dụ tiêu biểu bao gồm:
 
 **Java Database Connectivity (JDBC)**\
