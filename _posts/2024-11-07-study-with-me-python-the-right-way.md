@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python the right way - Rule #5 - Prefer multiple assignment unpacking over indexing
+title: Python the right way - Rule No.5 - Prefer multiple assignment unpacking over indexing
 categories: [python, best_practice]
 tags: [python, best_practice]
 date: 2024-11-07 23:00 +0700
