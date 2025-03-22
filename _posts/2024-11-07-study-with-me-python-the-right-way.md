@@ -6,8 +6,6 @@ tags: [ discussion, design_pattern, system_design ]
 date: 2024-11-07 23:00 +0700
 ---
 
-![cover](../img/design-pattern-facade/cover.png)
-
 Chào mừng anh em trở lại với
 series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối
 tượng.
