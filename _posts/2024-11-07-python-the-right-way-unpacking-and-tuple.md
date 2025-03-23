@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Python the right way - Unpacking and tuple
-categories: [python, best_practice]
-tags: [python, best_practice]
+categories: [python, best_practices]
+tags: [python, best_practices]
 date: 2024-11-07 23:00 +0700
 ---
 
@@ -15,7 +15,7 @@ Tôi sẽ không chỉ đơn thuần tóm tắt lại nội dung cuốn sách, m
 
 Let's get it.
 
-# I. Rule #5 - Prefer multiple assigment unpacking over indexing
+# I. Rule #5 - Prefer multiple assignment unpacking over indexing
 ## 1. Explanation
 Thay vì sử dụng chỉ mục (index) để truy xuất phần tử trong iterable như tuple hay list.\
 Unpacking giúp code trở nên rõ ràng hơn, giảm thiểu lỗi, và tăng hiệu suất xử lý.
@@ -134,13 +134,13 @@ to_refund = (calculate_refund(
 
 print(type(to_refund)) # <class 'tuple'>
 ```
------
-
 ## 2. Things to remember
 - Việc khai báo tuple trong Python có nhiều cách khác nhau bằng cách kết hợp () và "," -> dễ gây nhầm lẫn cho người mới.
 - Tuple thông thường được khai báo bằng cách sử dụng dấu () và phân tách các phần tử bằng dấu ","
 - Với tuple có một phần tử luôn phải đặt dấu phẩy "," ở cuối, dấu ngoặc () optional.
 - Best practice: luôn sử dụng dấu ngoặc () cho tuple một phần tử để tránh hiểu nhầm về ý nghĩa của biến.
+
+-----
 
 Anh em có thể tham khảo các bài viết khác của tôi tại [Blog cái nhân](https://nguyentaijs.github.io/) hoặc kết nối với
 tôi qua [Linkedin](https://www.linkedin.com/in/nguyentaijs)

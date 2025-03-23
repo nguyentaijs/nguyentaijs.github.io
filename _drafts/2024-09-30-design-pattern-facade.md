@@ -6,7 +6,7 @@ tags: [ discussion, design_pattern, system_design ]
 date: 2024-10-04 22:00 +0700
 ---
 
-![cover](../img/design-pattern-facade/cover.png)
+![cover](../assets/img/design-pattern-facade/cover.png)
 
 Chào mừng anh em trở lại với
 series [Design Pattern thực chiến](https://viblo.asia/s/design-pattern-thuc-chien-0gdJzpPnVz5) trong lập trình hướng đối
@@ -50,7 +50,7 @@ Các lợi ích khi sử dụng Facade bao gồm
 
 ## 4. Structure (Cấu trúc)
 
-![Structure](../img/design-pattern-facade/structure.png)
+![Structure](../assets/img/design-pattern-facade/structure.png)
 
 **Facade**\
 Cung cấp interface đơn giản cho hệ thống con.
