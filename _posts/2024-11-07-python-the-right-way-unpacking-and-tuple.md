@@ -6,9 +6,13 @@ tags: [python, best_practice]
 date: 2024-11-07 23:00 +0700
 ---
 
-Trong series này, anh em sẽ cùng tôi đi qua các quy tắc được recommend trong cuốn Effective Python – 125 Specific Ways to Write Better Python của tác giả Brett Slatkin.\
-Đây là một cuốn sách hữu ích giúp anh em viết code Python tốt hơn, hiệu quả hơn, và tuân theo những best practice.\
-Tôi sẽ không chỉ đơn thuần tóm tắt lại nội dung cuốn sách, mà còn chia sẻ những trải nghiệm cá nhân, những bài học rút ra trong quá trình học Python từ góc nhìn của một người đã có kinh nghiệm với Java.\
+![cover]({{ site.baseurl }}/assets/img/python_the_right_way_no1.png)
+
+Trong series này, anh em sẽ cùng tôi đi qua các quy tắc được recommend trong cuốn **Effective Python – 125 Specific Ways to Write Better Python** của tác giả **Brett Slatkin**.\
+Đây là một cuốn sách hữu ích giúp anh em viết code Python tốt hơn, hiệu quả hơn, và tuân theo những best practice.
+
+Tôi sẽ không chỉ đơn thuần tóm tắt lại nội dung cuốn sách, mà còn chia sẻ những trải nghiệm cá nhân, những bài học rút ra trong quá trình học Python từ góc nhìn của một người đã có kinh nghiệm với Java.
+
 Let's get it.
 
 # I. Rule #5 - Prefer multiple assigment unpacking over indexing
