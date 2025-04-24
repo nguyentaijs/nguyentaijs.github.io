@@ -6,7 +6,7 @@ tags: [ discussion, prompt_engineering, AI, LLM ]
 date: 2025-04-24 23:00 +0700
 ---
 
-![cover](../assets/img/factors_influencing_LLM_output.png)
+![cover]({{ site.baseurl }}/assets/img/factors_influencing_LLM_output.png)
 
 ### Model Used
 Model được sử dụng ảnh hưởng lớn đến chất lượng của kết quả trả về. Các mô hình khác nhau có kiến trúc, khả năng và phương pháp huấn luyện khác nhau, dẫn đến các phản hồi khác nhau ngay cả khi sử dụng cùng 1 prompt.
