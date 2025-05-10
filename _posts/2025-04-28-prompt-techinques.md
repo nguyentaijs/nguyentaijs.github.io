@@ -82,6 +82,25 @@ Ví dụ:
 >    return average_price
 
 # Step-back prompting
+Step-back prompting là kỹ thuật giúp LLM cải thiện chất lượng, độ chính xác và khả năng suy luận.\
+Thay vì yêu cầu LLM trả lời trực tiếp một câu hỏi phức tạp, chúng ta đưa ra yêu cầu bài toán và yêu cầu LLM "step-back" (lùi lại) để suy nghĩ về khái niệm, nguyên tắc, đưa ra chiến lược, phương pháp giải quyết bài toán ban đầu. Sau khi hài lòng với chiến lược của LLM, chúng ta mới đưa ra yêu cầu cho LLM để áp dụng chiến lược đó giải quyết bài toán ban đầu.
+
+
+Ví dụ:
+User
+>Câu hỏi gốc:
+>
+>Viết một hàm kiểm tra xem chuỗi có phải là hoán vị của một palindrome hay không (ví dụ: “civic”, “ivicc”).
+>
+>Step-back Prompt:
+>
+>“Trước tiên, hãy mô tả cách suy nghĩ để giải quyết bài toán này.”
+
+AI (step-back)
+>"Một chuỗi là hoán vị của palindrome nếu tối đa chỉ có một ký tự xuất hiện lẻ số lần. Tôi cần đếm tần suất từng ký tự và kiểm tra số lượng ký tự lẻ."
+
+User
+>"Bây giờ, hãy áp dụng chiến lược trên để viết code bằng Python."
 
 # Chain of thought (CoT)
 
