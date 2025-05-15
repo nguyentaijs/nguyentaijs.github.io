@@ -119,19 +119,75 @@ def is_permutation_of_palindrome(s):
 ```
 
 # Chain of thought (CoT)
+Chain of Thought (CoT) là kỹ thuật prompting trong đó LLM được yêu cầu suy luận từng bước một để giải quyết vấn đề, thay vì trả lời ngay lập tức. CoT phù hợp cho các tác vụ cần suy luận nhiều bước hoặc giải bài toán logic/phép toán phức tạp. Ý tưởng chính là buộc mô hình "nói ra suy nghĩ" và qua đó mô hình tạo được hướng tư duy rõ ràng, giống như cách con người giải toán: phân tích đề, liệt kê giả thiết, thực hiện từng bước, rồi kết luận.
+
+Bản chất LLM không phải là "suy luận logic" như con người, mà là dự đoán từ tiếp theo có xác suất cao nhất dựa trên tập dữ liệu huấn luyện. Do đó, với các bài toán logic hoặc tính toán, LLM thường dễ mắc lỗi nếu không được hướng dẫn từng bước cụ thể. CoT giúp mô hình tái hiện cách tư duy hợp lý hơn thông qua việc mô phỏng chuỗi suy luận.
+
+Ví dụ:
+
+**User**\
+Tính tổng các số lẻ từ 1 đến 9. Hãy suy luận từng bước trước khi đưa ra kết quả.
+
+**AI**\
+Các số lẻ từ 1 đến 9 là: 1, 3, 5, 7, 9
+Tổng các số đó là: 1 + 3 + 5 + 7 + 9 = 25
 
 # Self-consistency
+Self-consistency là một chiến lược giúp cải thiện chất lượng đầu ra của LLM bằng cách chạy nhiều lần một prompt theo dạng Chain of Thought, sau đó chọn câu trả lời xuất hiện nhiều nhất (most frequent answer).
+
+Kỹ thuật này phù hợp khi tác vụ có tính không chắc chắn cao hoặc liên quan đến suy luận – ví dụ như giải toán, suy diễn logic, hoặc phân tích ngữ cảnh phức tạp. Thay vì chỉ lấy 1 câu trả lời, anh em để mô hình suy nghĩ theo nhiều hướng khác nhau, rồi chọn ra kết quả cuối cùng dựa trên xác suất.
+
+Ví dụ:
+
+**User**\
+Viết chương trình đếm số ký tự khác nhau trong chuỗi “banana”. Chạy 3 lần và chọn kết quả xuất hiện nhiều nhất.
+
+**AI**\
+Lần 1: Các ký tự khác nhau là b, a, n → có 3 ký tự khác nhau.\
+Lần 2: Các ký tự duy nhất là b, a, n → tổng cộng 3 ký tự.\
+Lần 3: Đếm số ký tự duy nhất trong “banana” là 3.\
+
+Kết quả xuất hiện nhiều nhất là: 3
 
 # Tree of thoughts (ToT)
+Tree of Thoughts (ToT) lấy Chain of Thought làm nền tảng, trong đó thay vì suy luận theo một hướng duy nhất, LLM suy nghĩ theo dạng cây – mỗi nhánh là một hướng tiếp cận khác nhau. ToT cho phép mô hình thử nhiều ý tưởng, phân nhánh logic, đánh giá từng hướng rồi chọn giải pháp tốt nhất.
+Điểm mạnh của ToT là giúp giải quyết các bài toán sáng tạo, lập kế hoạch, tối ưu hóa hoặc những bài toán cần "tầm nhìn rộng". Thay vì chỉ đi theo một lối mòn, ToT cho mô hình quyền thử nhiều phương án trước khi kết luận.
+
+Để áp dụng ToT, prompt nên khuyến khích mô hình đề xuất nhiều phương án, đánh giá ưu-nhược điểm của từng phương án, sau đó chọn hướng giải quyết tối ưu nhất.
+
+Ví dụ:
+
+**User**\
+Viết kế hoạch kiểm tra đầu vào cho một hàm nhận chuỗi trong Python. Đưa ra 3 hướng tiếp cận, phân tích ưu nhược, chọn cách tốt nhất.
+
+**AI**\
+
+- Kiểm tra độ dài chuỗi (Ưu: nhanh; Nhược: không phát hiện lỗi ký tự)
+- Kiểm tra ký tự hợp lệ (chỉ chứa chữ cái) (Ưu: đảm bảo an toàn; Nhược: tốn CPU)
+- Kiểm tra bằng regex (Ưu: linh hoạt; Nhược: khó đọc)
+
+→ Chọn cách 2 vì cân bằng tốt giữa bảo vệ và hiệu năng.
 
 # ReAct (Reason and Act)
+eAct là kỹ thuật prompting kết hợp giữa “Reasoning” (suy luận) và “Acting” (hành động), cho phép mô hình vừa suy nghĩ, vừa thực hiện hành động (như gọi hàm, truy vấn thông tin, hoặc in kết quả trung gian). Kỹ thuật này phù hợp cho các task yêu cầu tư duy phức tạp và khả năng tương tác như lập trình, truy vấn cơ sở dữ liệu, hay giải quyết bài toán từng bước có hành động xen kẽ.
 
-# Automatic prompt Engineering
+Với ReAct, prompt thường yêu cầu mô hình vừa nêu lý do (Reason) cho mỗi hành động, rồi thực hiện hành động tương ứng (Act). Điều này giúp cải thiện độ rõ ràng, minh bạch và khả năng debug các lời giải của mô hình.
 
-# Code prompting
+ReAct hữu ích trong môi trường agent hoặc các hệ thống yêu cầu tác nhân suy nghĩ rồi quyết định bước tiếp theo.
 
+Ví dụ:
 
+**User**\
+Tôi cần kiểm tra xem một số có chia hết cho 3 không. Hãy giải thích trước, rồi viết mã Python kiểm tra.
 
+**AI**\
+Reason: Để biết một số chia hết cho 3, ta kiểm tra nếu number % 3 == 0.
+Act:
+
+```python
+def is_divisible_by_3(number):
+    return number % 3 == 0
+```
 
 
 ## Lời kết
