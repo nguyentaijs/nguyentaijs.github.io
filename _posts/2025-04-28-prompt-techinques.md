@@ -83,7 +83,7 @@ Input = 2, 2 Expecting output 4\
 Input = 4, 2 Expecting output 6\
 write a python function comfort above example
 
-**AI**\
+**AI**
 ```
 def comfort(a, b):
 """
@@ -123,7 +123,7 @@ Do đó, số lượng và chất lượng ví dụ là yếu tố then chốt q
 
 ## Example
 
-**User**
+**User**\
 You are a Python code reviewer specializing in data analysis. Provide a *bulleted* list (max 5 points) of actionable improvements for the code. Focus on error handling, robustness, and clarity. Avoid generic suggestions. (System prompting)
 
 This code calculates the average product price from a daily-generated CSV (`product_prices.csv`). The CSV is mostly clean, but may contain missing prices, currency symbols, or empty lines. Target user: junior data analysts. (Contextual prompting)
@@ -197,11 +197,34 @@ Bản chất LLM không phải là "suy luận logic" như con người, mà là
 ## Example (Simple)
 
 **User**\
-Tính tổng các số lẻ từ 1 đến 9. Hãy suy luận từng bước trước khi đưa ra kết quả.
+Cho yêu cầu như sau:\
+Một công ty tổ chức phỏng vấn với 5 ứng viên (A, B, C, D, E) theo thứ tự khác nhau trong ngày. Biết rằng:\
+A được phỏng vấn trước C.\
+B không phải là người đầu tiên.\
+D được phỏng vấn sau E nhưng trước A.\
+Hỏi thứ tự đúng của các ứng viên là gì?\
+
+Suy luận từng bước trước khi đưa ra câu trả lời cuối cùng.
 
 **AI**\
-Các số lẻ từ 1 đến 9 là: 1, 3, 5, 7, 9
-Tổng các số đó là: 1 + 3 + 5 + 7 + 9 = 25
+Có 5 người: A, B, C, D, E cần được sắp xếp theo thứ tự từ 1 đến 5.
+Giả thiết 1: A < C → A phỏng vấn trước C.\
+Giả thiết 2: B ≠ 1 → B không ở vị trí đầu tiên.\
+Giả thiết 3: E < D < A → E phỏng vấn trước D, và D trước A.\
+→ Suy ra: E < D < A < C (từ giả thiết 1 và 3).\
+
+Có 5 người, nên các vị trí là 1 đến 5.\
+Hãy thử gán các vị trí từ giả thiết:\
+Giả sử E = 1 → D = 2 → A = 3 → C = 4 → Còn lại B = 5\
+✅ Thỏa:\
+- A < C (3 < 4) → OK
+- B ≠ 1 → B = 5 → OK
+- E < D < A (1 < 2 < 3) → OK
+
+👉 Không có mâu thuẫn nào, đây có vẻ là đáp án duy nhất hợp lệ.
+
+🎯 Kết quả cuối cùng:\
+Thứ tự phỏng vấn là: E, D, A, C, B
 
 # Self-consistency
 Self-consistency là một chiến lược giúp cải thiện chất lượng đầu ra của LLM bằng cách chạy nhiều lần một prompt theo dạng Chain of Thought, sau đó chọn câu trả lời xuất hiện nhiều nhất (most frequent answer).
