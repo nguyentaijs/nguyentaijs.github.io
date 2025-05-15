@@ -9,24 +9,49 @@ date: 2025-04-28 19:00 +0700
 ![cover]({{ site.baseurl }}/assets/img/prompting-techniques.png)
 
 # Zero shot / General prompting
-Zero-shot prompting là sử dụng prompt để giao cho LLM 1 task yêu cầu nó thực hiện và không cung cấp thêm thông tin gì.
+## Description
+**Zero-shot prompting** là sử dụng prompt để giao cho LLM 1 task yêu cầu nó thực hiện và không cung cấp thêm thông tin gì.
 
-###Ví dụ
+## Pros
+- Ngắn gọn, dễ thực hiện.
+- Thích hợp với các tác vụ phổ biến (dịch thuật, định nghĩa, giải thích…).
 
+## Cons
+- Dễ bị hiểu sai yêu cầu nếu task không rõ ràng.
+- Output có thể không ổn định hoặc không đúng format mong muốn.
+
+## Usecase
+- Khi task đơn giản hoặc quen thuộc với mô hình.
+- Khi muốn tiết kiệm dung lượng prompt.
+- Đặt câu hỏi mở, yêu cầu viết đoạn văn, định nghĩa khái niệm, dịch thuật.
+
+## Example
 **User**\
 Explain the origin of the name 'Python' in the context of the Python programming language
 
 **AI**\
 The Python programming language was named after the British comedy group Monty Python.
- Guido van Rossum, the creator of Python, was a big fan of Monty Python's Flying Circus, and he wanted a name for his new language that was short, unique, and a little bit mysterious.\
- He didn't want the name to be too serious or technical. He was looking for a successor name of the ABC programming language, of which the working title was Advanced B. Then the language was getting ready to release. He thought that "Python" was a suitable name that stood out. Ultimately, the naming of Python was simply a nod to a comedic influence in its creator's life, showing a bit of whimsy in the world of programming.
+Guido van Rossum, the creator of Python, was a big fan of Monty Python's Flying Circus, and he wanted a name for his new language that was short, unique, and a little bit mysterious.\
+He didn't want the name to be too serious or technical. He was looking for a successor name of the ABC programming language, of which the working title was Advanced B. Then the language was getting ready to release. He thought that "Python" was a suitable name that stood out. Ultimately, the naming of Python was simply a nod to a comedic influence in its creator's life, showing a bit of whimsy in the world of programming.
 
 # One-shot / few-shot
 ## One-shot
-One-shot là kiểu prompting mà anh em cung cấp cho LLM 1 task kèm theo 1 ví dụ để thực hiện.
 
-###Ví dụ
+### Description
+**One-shot** là kiểu prompting mà anh em cung cấp cho LLM 1 task kèm theo 1 ví dụ để thực hiện. Model có thể dựa vào ví dụ được cung cấp để hiểu hơn về yêu cầu và format của kết quả mong muốn.
 
+### Pros
+- Định hình được đầu ra rõ hơn so với zero-shot.
+- Giảm rủi ro hiểu sai task.
+
+### Cons
+- Nếu ví dụ không đủ rõ ràng, mô hình có thể  hiểu sai pattern.
+- Một ví dụ có thể không đủ cho những task phức tạp.
+
+### Usecase
+- Sinh code, xử lý văn bản, phân loại đơn giản, định dạng output.
+
+### Example
 **User**\
 Example: Function to calculate the area of a rectangle in Python\
 Input: width = 5, height = 10\
@@ -37,9 +62,20 @@ Input: base = 4, height = 6\
 Output:
 
 ## Few-shot
+### Description
 Few-shot sử dụng nhiều example hơn để làm rõ mối quan hệ của input-output và pattern output kỳ vọng cho task. Few-shot phù hợp với các yêu cầu phức tạp, cần đưa ra các case cho nhiều trường hợp và các giá trị biên dùng làm tham chiếu cho LLM.
 
-###Ví dụ
+### Pros
+- Học từ pattern trong các ví dụ.
+- Giảm thiểu lỗi suy diễn sai của one-shot prompting.
+- Có thể xử lý các edge cases nếu cung cấp đúng và đủ các ví dụ.
+
+### Usecase
+- Task phức tạp hoặc đòi hỏi LLM tự tìm ra quy luật dựa trên các ví dụ.
+- Khi cần đảm bảo format đầu ra thống nhất.
+- Xử lý dữ liệu phi cấu trúc, trích xuất thông tin có quy luật.
+
+### Example
 **User**\
 Example:
 
@@ -63,8 +99,9 @@ The sum of a and b.
 return a + b
 ```
 
-Mặc dù chỉ đưa ra yêu cầu chung chung là "function comfort above example", nhưng với đủ ví dụ, LLM có thể hiểu được pattern chung của 2 ví dụ trên là phép tính tổng 2 input đầu vào.\
-Phương pháp này hữu ích khi anh em muốn LLM tự tìm ra quy luật dựa vào các ví dụ mà anh em cung cấp. Số lượng ví dụ và chất lượng của ví dụ sẽ ảnh hưởng đến độ chính xác đầu ra của LLM.
+Nếu chỉ đưa một ví dụ như input = 2, 2 → output = 4, LLM có thể hiểu nhầm giữa phép cộng và phép nhân, dễ dẫn đến kết quả không đúng kỳ vọng. Đây cũng là nhược điểm của one-shot prompting đã nêu ở trên.\
+Ngược lại, khi dùng few-shot prompting với đầy đủ ví dụ, mô hình có thể nhận ra quy luật. Dù yêu cầu chung chung như "function comfort above example", đủ ví dụ giúp LLM suy luận đúng logic.\
+Do đó, số lượng và chất lượng ví dụ là yếu tố then chốt quyết định độ chính xác của mô hình.
 
 # System, contextual and role prompting
 **System prompting** là quá trình cung cấp hướng dẫn, thêm thông tin và các chỉ dẫn cần thiết để LLM hiểu và định hướng kết quả kỳ vọng. Định nghĩa big picture task mà LLM phải thực hiện như dịch thuật, phân loại, etc.\
@@ -73,7 +110,18 @@ Phương pháp này hữu ích khi anh em muốn LLM tự tìm ra quy luật d�
 
 3 techniques này không triệt tiêu lẫn nhau mà bổ trợ cho nhau, giúp LLM hiểu rõ về yêu cầu và kỳ vọng output mong muốn của anh em.
 
-###Ví dụ
+## Pros
+- Cung cấp đủ thông tin và kỳ vọng đầu ra do đó kết quả có độ chính xác, nhất quán cao.
+- Kiểm soát được giọng điệu và tính tự nhiên của output.
+
+## Cons
+- Prompt phức tạp
+
+## Usecase
+- Đóng vai nhân vật, chuyên gia, tạo chatbot theo vai trò cụ thể.
+- Có thể ứng dụng để integrate thông qua API (có thể sử dụng system prompting để mô tả JSON output contract)
+
+## Example
 
 **User**
 You are a Python code reviewer specializing in data analysis. Provide a *bulleted* list (max 5 points) of actionable improvements for the code. Focus on error handling, robustness, and clarity. Avoid generic suggestions. (System prompting)
@@ -94,12 +142,23 @@ def calculate_average_price(filename):
 Step-back prompting là kỹ thuật giúp LLM cải thiện chất lượng, độ chính xác và khả năng suy luận.\
 Thay vì yêu cầu LLM trả lời trực tiếp một câu hỏi phức tạp, chúng ta đưa ra yêu cầu bài toán và yêu cầu LLM "step-back" (lùi lại) để suy nghĩ về khái niệm, nguyên tắc, đưa ra chiến lược, phương pháp giải quyết bài toán ban đầu. Sau khi hài lòng với chiến lược của LLM, chúng ta mới đưa ra yêu cầu cho LLM để áp dụng chiến lược đó giải quyết bài toán ban đầu.
 
+## Pros
+- Hiểu được cách model xử lý yêu cầu.
+- Có thể can thiệp, tinh chỉnh giúp model tư duy, xử lý đúng kỳ vọng.
 
-###Ví dụ
+## Cons
+- Phức tạp
+- Không phù hợp với các yêu cầu đơn giản.
+
+## Ứng dụng
+- Task đòi hỏi tư duy chiến lược, output rõ ràng, có logic.
+- Giải toán, lập kế hoạch, đánh giá rủi ro.
+
+## Example
 
 **User**\
 Câu hỏi gốc:\
-Viết một hàm kiểm tra xem chuỗi có phải là hoán vị của một palindrome hay không (###Ví dụ: “civic”, “ivicc”).
+Viết một hàm kiểm tra xem chuỗi có phải là hoán vị của một palindrome hay không (### Ví dụ: “civic”, “ivicc”).
 
 Step-back Prompt:\
 “Trước tiên, hãy mô tả cách suy nghĩ để giải quyết bài toán này.”
@@ -123,7 +182,19 @@ Chain of Thought (CoT) là kỹ thuật prompting trong đó LLM được yêu c
 
 Bản chất LLM không phải là "suy luận logic" như con người, mà là dự đoán từ tiếp theo có xác suất cao nhất dựa trên tập dữ liệu huấn luyện. Do đó, với các bài toán logic hoặc tính toán, LLM thường dễ mắc lỗi nếu không được hướng dẫn từng bước cụ thể. CoT giúp mô hình tái hiện cách tư duy hợp lý hơn thông qua việc mô phỏng chuỗi suy luận.
 
-###Ví dụ
+## Pros
+- Giúp anh em hiểu các thực hiện.
+- Giúp model suy luận rõ ràng, output có độ tin cậy cao.
+
+## Cons
+- Phức tạp, tốn chi phí token.
+- Không phù hợp với các task đơn giản, không cần giải thích.
+
+## Usecase
+- Task cần nhiều bước logic (toán học, lập luận, phân tích).
+- Khi muốn tăng độ chính xác của output.
+
+## Example (Simple)
 
 **User**\
 Tính tổng các số lẻ từ 1 đến 9. Hãy suy luận từng bước trước khi đưa ra kết quả.
@@ -137,7 +208,19 @@ Self-consistency là một chiến lược giúp cải thiện chất lượng �
 
 Kỹ thuật này phù hợp khi tác vụ có tính không chắc chắn cao hoặc liên quan đến suy luận – ví dụ như giải toán, suy diễn logic, hoặc phân tích ngữ cảnh phức tạp. Thay vì chỉ lấy 1 câu trả lời, anh em để mô hình suy nghĩ theo nhiều hướng khác nhau, rồi chọn ra kết quả cuối cùng dựa trên xác suất.
 
-###Ví dụ
+## Pros
+- Tăng xác suất output chính xác.
+- Giảm sai số do random hoặc bias.
+
+## Cons
+- Tốn tài nguyên (do chạy nhiều lần).
+- Không phù hợp với các task đơn giản.
+
+## Usecase
+- Task có nhiều khả năng gây nhầm lẫn hoặc output không ổn định.
+- Khi chấp nhận trade-off hiệu suất để tăng độ tin cậy.
+
+## Example
 
 **User**\
 Viết chương trình đếm số ký tự khác nhau trong chuỗi “banana”. Chạy 3 lần và chọn kết quả xuất hiện nhiều nhất.
@@ -155,7 +238,18 @@ Tree of Thoughts (ToT) lấy Chain of Thought làm nền tảng, trong đó thay
 
 Để áp dụng ToT, prompt nên khuyến khích mô hình đề xuất nhiều phương án, đánh giá ưu-nhược điểm của từng phương án, sau đó chọn hướng giải quyết tối ưu nhất.
 
-###Ví dụ
+## Pros
+- Tăng khả năng tìm được giải pháp tối ưu.
+
+## Cons
+- Phức tạp, tốn thời gian + token.
+- Cần có hiểu biết để hướng dẫn model phân nhánh.
+
+## Use case
+- Task sáng tạo, lập kế hoạch, tối ưu hóa.
+- Khi cần tư duy sáng tạo và so sánh nhiều phương án.
+
+## Example
 
 **User**\
 Viết kế hoạch kiểm tra đầu vào cho một hàm nhận chuỗi trong Python. Đưa ra 3 hướng tiếp cận, phân tích ưu nhược, chọn cách tốt nhất.
@@ -169,28 +263,48 @@ Viết kế hoạch kiểm tra đầu vào cho một hàm nhận chuỗi trong P
 → Chọn cách 2 vì cân bằng tốt giữa bảo vệ và hiệu năng.
 
 # ReAct (Reason and Act)
-eAct là kỹ thuật prompting kết hợp giữa “Reasoning” (suy luận) và “Acting” (hành động), cho phép mô hình vừa suy nghĩ, vừa thực hiện hành động (như gọi hàm, truy vấn thông tin, hoặc in kết quả trung gian). Kỹ thuật này phù hợp cho các task yêu cầu tư duy phức tạp và khả năng tương tác như lập trình, truy vấn cơ sở dữ liệu, hay giải quyết bài toán từng bước có hành động xen kẽ.
+**ReAct** là kỹ thuật prompting kết hợp giữa “Reasoning” (suy luận) và “Acting” (hành động), cho phép mô hình vừa suy nghĩ, vừa thực hiện hành động (như gọi hàm, truy vấn thông tin, hoặc in kết quả trung gian). Kỹ thuật này phù hợp cho các task yêu cầu tư duy phức tạp và khả năng tương tác như lập trình, truy vấn cơ sở dữ liệu, hay giải quyết bài toán từng bước có hành động xen kẽ.
 
 Với ReAct, prompt thường yêu cầu mô hình vừa nêu lý do (Reason) cho mỗi hành động, rồi thực hiện hành động tương ứng (Act). Điều này giúp cải thiện độ rõ ràng, minh bạch và khả năng debug các lời giải của mô hình.
 
 ReAct hữu ích trong môi trường agent hoặc các hệ thống yêu cầu tác nhân suy nghĩ rồi quyết định bước tiếp theo.
 
-###Ví dụ
+## Pros
+- Dễ kiểm tra từng bước reasoning.
+- Có thể tương tác với các tool để thu thập thông tin
+
+## Cons
+- Phức tạp
+
+## Usecase
+- Task phức tạp, cần tương tác với các tool bên ngoài để thu thập thông tin.
+
+
+## Example
 
 **User**\
-Tôi cần kiểm tra xem một số có chia hết cho 3 không. Hãy giải thích trước, rồi viết mã Python kiểm tra.
+Cho tôi biết thời tiết hiện tại ở Hà Nội, và tôi cần biết có nên mang ô không.
 
 **AI**\
-Reason: Để biết một số chia hết cho 3, ta kiểm tra nếu number % 3 == 0.
-Act:
+Thought: Tôi cần kiểm tra thời tiết hiện tại ở Hà Nội để đưa ra lời khuyên.\
+Action: CallWeatherAPI("Hanoi")
 
-```python
-def is_divisible_by_3(number):
-    return number % 3 == 0
-```
+Observation: Thời tiết ở Hà Nội hiện tại: Mưa nhỏ, nhiệt độ 24°C.\
+Thought: Trời đang mưa, nên người dùng nên mang ô.
 
+Action: Respond("Thời tiết ở Hà Nội đang mưa nhẹ (24°C). Bạn nên mang theo ô khi ra ngoài.")
 
-## Lời kết
-Hiểu rõ cách các yếu tố như model, training data, configs, context và cách viết prompt ảnh hưởng đến đầu ra sẽ giúp anh em khai thác tối đa sức mạnh của các mô hình ngôn ngữ lớn. Bằng cách áp dụng những nguyên tắc này, anh em có thể tạo ra prompt chất lượng hơn, cho phản hồi chính xác và giá trị hơn.
+# Lời kết
+Bài viết này tổng hợp những kỹ thuật prompting cơ bản, giúp anh em hiểu rõ hơn cách tương tác hiệu quả với model. Tuy nhiên, tôi vẫn đang trong quá trình tìm hiểu, nên nội dung có thể chưa đủ sâu và cũng chưa thể bao quát hết toàn bộ các phương pháp.
+
+Một số kỹ thuật như `automatic prompt engineering`, `code prompting`, hay các phương pháp kết hợp với công cụ ngoài (`tool-augmented prompting`) vẫn chưa được đề cập xin nhường lại cho các chiên za master mảng prompting này.
+
+Hy vọng bài viết này hữu ích với anh em dev đang bắt đầu khám phá thế giới prompt engineering. Nếu có góp ý, ví dụ hay tài liệu hay ho, rất mong được anh em chia sẻ!
 
 **Prompt engineering không chỉ là kỹ thuật – đó là nghệ thuật giao tiếp hiệu quả với AI.**
+
+-----
+
+Nếu anh em cảm thấy bài viết hữu ích đừng ngần ngại click upvote cho bài viết, hoặc phát hiện ý nào chưa hợp lý hoặc cần giải thích thêm hãy comment cho tôi biết để cùng trao đổi nhé.
+Anh em có thể tham khảo các bài viết khác của tôi tại [Blog cái nhân](https://nguyentaijs.github.io/) hoặc kết nối với tôi qua [Linkedin](https://www.linkedin.com/in/nguyentaijs)
+
