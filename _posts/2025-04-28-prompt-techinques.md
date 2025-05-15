@@ -194,7 +194,7 @@ Bản chất LLM không phải là "suy luận logic" như con người, mà là
 - Task cần nhiều bước logic (toán học, lập luận, phân tích).
 - Khi muốn tăng độ chính xác của output.
 
-## Example (Simple)
+## Example
 
 **User**\
 Cho yêu cầu như sau:\
@@ -202,7 +202,7 @@ Một công ty tổ chức phỏng vấn với 5 ứng viên (A, B, C, D, E) the
 A được phỏng vấn trước C.\
 B không phải là người đầu tiên.\
 D được phỏng vấn sau E nhưng trước A.\
-Hỏi thứ tự đúng của các ứng viên là gì?\
+Hỏi thứ tự đúng của các ứng viên là gì?
 
 Suy luận từng bước trước khi đưa ra câu trả lời cuối cùng.
 
@@ -211,12 +211,12 @@ Có 5 người: A, B, C, D, E cần được sắp xếp theo thứ tự từ 1 
 Giả thiết 1: A < C → A phỏng vấn trước C.\
 Giả thiết 2: B ≠ 1 → B không ở vị trí đầu tiên.\
 Giả thiết 3: E < D < A → E phỏng vấn trước D, và D trước A.\
-→ Suy ra: E < D < A < C (từ giả thiết 1 và 3).\
+→ Suy ra: E < D < A < C (từ giả thiết 1 và 3).
 
 Có 5 người, nên các vị trí là 1 đến 5.\
 Hãy thử gán các vị trí từ giả thiết:\
 Giả sử E = 1 → D = 2 → A = 3 → C = 4 → Còn lại B = 5\
-✅ Thỏa:\
+✅ Thỏa:
 - A < C (3 < 4) → OK
 - B ≠ 1 → B = 5 → OK
 - E < D < A (1 < 2 < 3) → OK
