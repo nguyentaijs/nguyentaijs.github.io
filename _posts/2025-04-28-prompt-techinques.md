@@ -15,6 +15,17 @@ Tuy nhiên, chỉ hiểu những yếu tố đó thôi là chưa đủ. Để th
 
 Trong bài viết này, tôi sẽ tiếp tục chuỗi chủ đề về Prompt Engineering bằng việc giới thiệu chi tiết các kỹ thuật prompting cơ bản – từ zero-shot đến các phương pháp nâng cao như Chain of Thought, Tree of Thoughts hay ReAct. Mỗi kỹ thuật tôi sẽ cung cấp 1 ví dụ đơn giản minh họa rõ ràng để anh em dễ nắm bắt và áp dụng vào thực tế.
 
+
+**Bài viết sẽ cover các techniques sau**
+* Zero shot / General prompting
+* One-shot / few-shot
+* System, contextual and role prompting
+* Step-back prompting
+* Chain of thought (CoT)
+* Self-consistency
+* Tree of thoughts (ToT)
+* ReAct (Reason and Act)
+
 # I. Zero shot / General prompting
 ## Description
 **Zero-shot prompting** là sử dụng prompt để giao cho LLM 1 task yêu cầu nó thực hiện và không cung cấp thêm thông tin gì.
