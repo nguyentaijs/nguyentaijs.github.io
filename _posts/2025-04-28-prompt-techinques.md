@@ -8,6 +8,13 @@ date: 2025-04-28 19:00 +0700
 
 ![cover]({{ site.baseurl }}/assets/img/prompting-techniques.png)
 
+
+Trong bài viết trước, tôi đã đề cập những yếu tố ảnh hưởng đến output của LLM. Những yếu tố này đóng vai trò nền tảng giúp chúng ta khai thác tốt hơn sức mạnh của LLM.
+
+Tuy nhiên, chỉ hiểu những yếu tố đó thôi là chưa đủ. Để thực sự giao tiếp hiệu quả với AI, chúng ta cần biết cách sử dụng các kỹ thuật prompting một cách linh hoạt và có chiến lược.
+
+Trong bài viết này, tôi sẽ tiếp tục chuỗi chủ đề về Prompt Engineering bằng việc giới thiệu chi tiết các kỹ thuật prompting cơ bản – từ zero-shot đến các phương pháp nâng cao như Chain of Thought, Tree of Thoughts hay ReAct. Mỗi kỹ thuật tôi sẽ cung cấp 1 ví dụ đơn giản minh họa rõ ràng để anh em dễ nắm bắt và áp dụng vào thực tế.
+
 # I. Zero shot / General prompting
 ## Description
 **Zero-shot prompting** là sử dụng prompt để giao cho LLM 1 task yêu cầu nó thực hiện và không cung cấp thêm thông tin gì.
