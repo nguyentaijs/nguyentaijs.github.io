@@ -187,7 +187,7 @@ Dưới đây là cấu trúc recommended của 1 file codebase summary
 ```
 Anh em có thể yêu cầu agent tóm tắt project theo bố cục trên, review và tiếp tục yêu cầu agent chỉnh sửa cho đến khi đạt được tiêu chuẩn đúng và đủ.
 
-> Nếu anh em thích mì ăn liền thì anh em có thể sử dụng [gitingest](gitingest.com) để hỗ trợ anh em summary và sử dụng file đó làm reference mỗi lần tương tác với agent.
+> Nếu anh em thích mì ăn liền thì anh em có thể sử dụng [gitingest](http://gitingest.com) để hỗ trợ anh em summary và sử dụng file đó làm reference mỗi lần tương tác với agent.
 
 # III. Re-index after big changes
 Việc re-index đảm bảo rằng agent luôn có được thông tin latest về trạng thái của project. Thông thường thì agent sẽ tự động re-index nhưng khi anh em thấy agent bắt đầu đưa ra những câu trả lời dựa trên codebase cũ thì anh em nên force re-index.
