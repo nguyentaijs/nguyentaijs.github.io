@@ -106,6 +106,7 @@ Sau mỗi cycle, anh em phải **review thật kỹ** danh sách test case đã 
 Trong một số trường hợp, agent có thể tự ý thay đổi assertion để khớp với code hiện tại, dẫn đến việc test không còn phản ánh đúng yêu cầu gốc.
 Do đó, anh em cần chủ động theo dõi cách agent xử lý từng cycle, thường xuyên kiểm tra lại các thay đổi do agent tạo ra, sẵn sàng can thiệp kịp thời nếu thấy agent đang đi lệch hướng.
 Nếu kết quả chấp nhận được, anh em nên thực hiện thao tác commit, 1 là change đủ nhỏ để anh em có thể review lại được, 2 là trong TH agent "làm láo", anh có có 1 check point để làm lại.
+
 Cursor có cung cấp tính năng "Restore checkpoint" có chức năng tương tự nhưng tôi vẫn khuyến khích anh em commit để tránh bị lost context khi làm việc với agent.
 
 Ví dụ:
@@ -125,7 +126,7 @@ Please start by implementing the first set of test cases from plan.md and provid
 ```
 
 
-# Codebase summary
+# III. Codebase summary
 Vì sao việc tóm tắt codebase lại đóng vai trò then chốt khi pair programming với agent?\
 Câu trả lời chỉ có 1 từ: **Context**
 
@@ -189,13 +190,13 @@ Anh em có thể yêu cầu agent tóm tắt project theo bố cục trên, revi
 
 > Nếu anh em thích mì ăn liền thì anh em có thể sử dụng [gitingest](http://gitingest.com) để hỗ trợ anh em summary và sử dụng file đó làm reference mỗi lần tương tác với agent.
 
-# III. Re-index after big changes
+# IV. Re-index after big changes
 Việc re-index đảm bảo rằng agent luôn có được thông tin latest về trạng thái của project. Thông thường thì agent sẽ tự động re-index nhưng khi anh em thấy agent bắt đầu đưa ra những câu trả lời dựa trên codebase cũ thì anh em nên force re-index.
 
 Ngoài ra, những file như codebase summary sẽ không được update tự động, do đó, anh em cần chủ động yêu cầu agent update những tài liệu liên quan để match với codebase mới nhất.
 Vấn đề này thường xảy ra khi anh em yêu cầu agent refactor cấu trúc project, hoặc anh em pull code được merge vào main branch.
 
-# IV. Kết luận
+# V. Kết luận
 AI Agent là một trợ thủ đắc lực của anh em, nhưng để khai thác hiệu quả, anh em **phải hiểu cách nó hoạt động**, biết rõ nó cần gì, giới hạn ở đâu, và làm sao để dẫn dắt nó trở thành một đồng đội thật sự.
 Hi vọng bài viết này giúp anh em tiết kiệm thời gian, bớt đau đầu, và tận dụng AI agent để tăng lương giảm giờ làm.
 
